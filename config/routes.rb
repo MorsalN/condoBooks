@@ -3,9 +3,17 @@ Rails.application.routes.draw do
 
   namespace :api do # /api/data
 
-    get '/data', to: 'tests#index'
+    get '/', to: 'users#index'
+    get '/admin' to: 'amenities#show'
     
-    resources :dogs
+    resources :users
+    resources :amenities only [:show]
+    resources :bookings only [:show]
+
+    namespace :admin do
+      root to: 'amenities#show'
+      resources :amenities
+    end
 
   end
 
