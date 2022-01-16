@@ -4,11 +4,11 @@ Rails.application.routes.draw do
   namespace :api do # /api/data
 
     get '/', to: 'users#index'
-    get '/admin' to: 'amenities#show'
+    get '/admin', to: 'amenities#show'
     
     resources :users
-    resources :amenities only [:show]
-    resources :bookings only [:show, :edit]
+    resources :amenities, only: [:show]
+    resources :bookings, only: [:show, :edit]
 
     namespace :admin do
       root to: 'amenities#show'
