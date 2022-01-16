@@ -9,6 +9,11 @@ gem 'rails', '~> 5.2.2', '>= 5.2.2.1'
 gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
+<<<<<<< HEAD
+=======
+
+# Add
+>>>>>>> origin/master
 gem 'mimemagic', '~> 0.3.3'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'

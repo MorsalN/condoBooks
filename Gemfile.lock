@@ -66,6 +66,10 @@ GEM
       mini_mime (>= 0.1.1)
     marcel (1.0.2)
     method_source (1.0.0)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/master
     mimemagic (0.3.10)
       nokogiri (~> 1)
       rake
@@ -76,6 +80,16 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.1)
       mini_portile2 (~> 2.7.0)
+<<<<<<< HEAD
+=======
+=======
+    mini_mime (1.1.2)
+    minitest (5.15.0)
+    msgpack (1.4.2)
+    nio4r (2.5.8)
+    nokogiri (1.13.1-x86_64-linux)
+>>>>>>> d840242c84523d360727211807861f35b80f3025
+>>>>>>> origin/master
       racc (~> 1.4)
     pg (1.2.3)
     puma (3.12.6)
