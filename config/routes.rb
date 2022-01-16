@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     
     resources :users
     resources :amenities only [:show]
-    resources :bookings only [:show]
+    resources :bookings only [:show, :edit]
 
     namespace :admin do
       root to: 'amenities#show'
