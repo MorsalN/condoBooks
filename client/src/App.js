@@ -11,6 +11,9 @@ import {
 import Homepage from './user_homepage';
 import NewBooking from './user_newbooking';
 import Summary from './user_summary';
+import Amenities from './admin/admin_homepage';
+import Add from './admin/admin_add';
+import Manage from './admin/admin_manage';
 
 
 // class App extends Component {
@@ -65,15 +68,14 @@ import Summary from './user_summary';
           {/* Summary Route (src/user_summary.jsx) */}
           <Route path='/:user_id/summary' element= {<Summary/>}/>
 
-          {/* Admin - Homepage (src/user_summary.jsx) */}
-          <Route path='/:user_id/summary' element= {<Summary/>}/>
+          {/* Admin - Homepage (src/admin/admin_homepage.jsx) */}
+          <Route path='/:user_id/amenities' element= {<Amenities/>}/>
 
+          {/* Admin - Add Amenities (src/admin/admin_add.jsx) */}
+          <Route path='/:user_id/add' element= {<Add/>}/>
 
-
-
-
-
-          
+          {/* Admin - Manage Amenities (src/admin/admin_manage.jsx) */}
+          <Route path='/:user_id/manage' element= {<Manage/>}/>
 
         </Routes>    
       </BrowserRouter>

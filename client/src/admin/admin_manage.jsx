@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 
-class Amenities extends Component {
+class Manage extends Component {
 
   render() {
     return (
-      <h1>This is a CURRENT AMENITIES for Admin!</h1>
+      <h1>This is a MANAGE AMENITIES for Admin!</h1>
     )
   }
 }
 
-export default Amenities;
+export default Manage;
