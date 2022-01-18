@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get '/data', to: 'tests#index'
     # get '/user', to: 'users#index'
     get '/admin', to: 'amenities#show'
+    post '/slot', to: 'bookings#create'
     
 
     resources :users, only: [:index]

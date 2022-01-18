@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
-
+import './css/Calendar.css'
 import "react-big-calendar/lib/css/react-big-calendar.css";
 const localizer = momentLocalizer(moment);
 
@@ -19,12 +19,20 @@ class NewBooking extends Component {
           .toDate(),
         title: "Event 1"
       }
-    ]
+    ],
+
+    slot: []
   };
 
+  selectSlotHandler = (slot) => {
+    console.log(slot)
+  }
+
+  
   render() {
     return (
-      <div className="App">
+      <section className="Calendar">
+      <div className="Calendar_box">
         <div style = {{width:700, height:500}}> 
         <Calendar
           localizer={localizer}
@@ -32,10 +40,12 @@ class NewBooking extends Component {
           defaultView="month"
           events={this.state.events}
           style={{ height: "100%", width: "100%" }}
+          selectable ={true}
+          onSelectSlot={this.selectSlotHandler}
         />
-
         </div>
       </div>
+      </section>
       
     )
   }
