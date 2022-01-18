@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
-import { Calendar, momentLocalizer } from "react-big-calendar";
+import { Calendar, momentLocalizer, TimeGrid } from "react-big-calendar";
 import moment from "moment";
 import './css/Calendar.css'
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -53,6 +53,8 @@ export default function NewBooking(props) {
 
   const handleSelect = ({ start, end }) => {
     const title = window.prompt('Book Amenitiy Time')
+    // console.log('handleselect')
+    // console.log('props:',props.events)
     if (title)
       setState({
         events: [
