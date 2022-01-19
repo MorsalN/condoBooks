@@ -87,3 +87,18 @@ main {
 .table {
   margin-bottom: 50px;
 }
+
+.rooms {
+  font-size:1em;
+  /* width: 8vw; */
+  min-width:90px;
+  height: 3vw;
+  min-height:40px;
+  margin:5px;
+  color: white;
+  letter-spacing: 0.05em;
+  font-weight: bold;
+  border-radius: 5px;
+  background: #3b748a;
+
+}
