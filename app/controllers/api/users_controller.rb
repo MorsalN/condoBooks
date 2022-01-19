@@ -4,4 +4,10 @@ class Api::UsersController < ApplicationController
       message: "hello users - Daniel, Morsal, Kal!"
     }
   end
+
+  def user_bookings
+    @booking = User.find(params[:id])
+    render json: @booking.bookings.all
+
+  end
 end

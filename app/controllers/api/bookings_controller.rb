@@ -1,5 +1,7 @@
 class Api::BookingsController < ApplicationController
-  def create
+  def show
+    @booking = Booking.find(params[:id])
+    render json: @booking
     
   end
 end

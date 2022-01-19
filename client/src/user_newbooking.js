@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import axios from "axios";
 import { Calendar, momentLocalizer, TimeGrid } from "react-big-calendar";
 import moment from "moment";
@@ -10,6 +10,9 @@ const localizer = momentLocalizer(moment);
 
 
 export default function NewBooking(props) {
+
+  const params = useParams()
+  console.log(params)
 
 
   useEffect(() => {
@@ -25,16 +28,16 @@ export default function NewBooking(props) {
       // });
     }) 
 
-    // axios.get('/api/slot', {params:{user_id:1}}) // You can simply make your requests to "/api/whatever you want"
-    // .then((response) => {
-    //   // handle success
-    //   console.log(response.data) // The entire response from the Rails API
+    axios.get(`/api/users/${params.user_id}/bookings`) // You can simply make your requests to "/api/whatever you want"
+    .then((response) => {
+      // handle success
+      console.log(response.data) // The entire response from the Rails API
 
-    //   console.log(response.data.message) // Just the message
-    //   // this.setState({
-    //   //   message: response.data.message
-    //   // });
-    // }) 
+      console.log(response.data.message) // Just the message
+      // this.setState({
+      //   message: response.data.message
+      // });
+    }) 
 
 
   })

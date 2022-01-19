@@ -75,7 +75,7 @@ import Nav from './nav';
           <Route path='/route' element= {<div>This is a new route</div>}/>
 
           {/* Homepage for User (src/user_homepage.jsx) */}
-          <Route path='/users' element= {<Homepage/>}/>
+          <Route path='/' element= {<Homepage/>}/>
 
           {/* New Amenity Booking (src/user_newbooking.jsx) */}
           <Route path='/:user_id/booking' element= {<NewBooking/>}/>

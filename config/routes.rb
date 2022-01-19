@@ -7,12 +7,14 @@ Rails.application.routes.draw do
     get '/data', to: 'tests#index'
     # get '/user', to: 'users#index'
     get '/admin', to: 'amenities#show'
+    #get '/bookings', to: 'bookings#index'
     post '/slot', to: 'bookings#create'
+    get '/users/:id/bookings', to: 'users#user_bookings'
     
 
     resources :users, only: [:index]
     resources :amenities, only: [:show]
-    resources :bookings, only: [:show, :edit]
+    resources :bookings, only: [:index, :show, :edit]
   
 
     namespace :admin do
