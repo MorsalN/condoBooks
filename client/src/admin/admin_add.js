@@ -63,6 +63,8 @@ export default function Add() {
         <button className="add">Add Amenity</button>
         <button className="back"onClick={() => navigate(-1)}>Back</button>
 
+        
+
       </div>
     </section>
 
