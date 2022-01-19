@@ -11,52 +11,50 @@ const localizer = momentLocalizer(moment);
 
 export default function NewBooking(props) {
 
-  const params = useParams()
-  console.log(params)
+  //defining state of the event
+  const [state, setState] = useState({
+    // event represent a booking
+    events: [
+     {
+       start: moment().toDate(),
+       end: moment()
+         .add(1, "days")
+         .toDate(),
+       title: "Event"
+     }
+   ]
+ });
 
+ const setEvents = events => setState(prev =>({ ...prev, events}));
+ const params = useParams();
+ console.log(params);
 
+//useEffect to made the get data from backend at every render 
   useEffect(() => {
-
-    axios.get('/api/users', {params:{user_id:1}}) // You can simply make your requests to "/api/whatever you want"
-    .then((response) => {
-      // handle success
-      console.log(response.data) // The entire response from the Rails API
-
-      console.log(response.data.message) // Just the message
-      // this.setState({
-      //   message: response.data.message
-      // });
-    }) 
 
     axios.get(`/api/users/${params.user_id}/bookings`) // You can simply make your requests to "/api/whatever you want"
     .then((response) => {
       // handle success
-      console.log(response.data) // The entire response from the Rails API
+      console.log("I am data",response.data) // The entire response from the Rails API
 
-      console.log(response.data.message) // Just the message
-      // this.setState({
-      //   message: response.data.message
-      // });
-    }) 
-
-
-  })
-
-
-  const [state, setState] = useState({
-     // event represent a booking
-     events: [
-      {
+      
+      setState(prev => ({...prev,
+        events: [
+        {
+          //start: moment().format(response.data[0].start_time),
+          //end: moment().format(response.data[0].end_time),
+          //end: moment(response.data[0].end_time).toDate(response.data[0].date),
         start: moment().toDate(),
         end: moment()
           .add(1, "days")
           .toDate(),
-        title: "Event"
-      }
-    ],
+          title: response.data[0].title //we need element 0 from the response
+        }]
+      }))
+      console.log("I am event from setState", state)
+    }) 
+  },[])
 
-    slot: []
-  });
 
   // Resets Form to empty values
    const reset = function () {
@@ -83,38 +81,51 @@ export default function NewBooking(props) {
 
   //This is to stick the selection and bring the alert event
 
+  // const handleSelect = ({ start, end }) => {
+  //   const title = window.prompt('Book Amenitiy Time')
+  //   console.log('handleselect')
+  //   console.log('props:',props.events)
+  //   if (title)
+  //     setState({
+  //       events: [
+  //         ...state.events,
+  //         {
+  //           start,
+  //           end,
+  //           title,
+  //         },
+  //       ],
+  //     })
+  // }
+
+//generate random id 
+function generateNumber() {
+  //generate a 6 alpha numeric character
+  return Math.floor((Math.random() * 100))
+}
+
   const handleSelect = ({ start, end }) => {
     const title = window.prompt('Book Amenitiy Time')
-    console.log('handleselect')
+    const id = generateNumber();
+    if(title) {
+    const events = {
+      ...state.events, 
+      events: {...start, end, title}
+    }
 
-
-    console.log('props:',props.events)
-    if (title)
-      setState({
-        events: [
-          ...state.events,
-          {
-            start,
-            end,
-            title,
-          },
-        ],
-      })
+    return (
+      axios.put(`/api/bookings/${params.user_id}/${id}`,{events})
+      .then(res => {
+            //console.log(res)
+            //updateSpots(id,true)
+            setState(prev => ({ ...prev, events}
+          ))
+        })
+    )
   }
+}
 
-  const selectSlotHandler = (slot) => {
-    // startDate = slot.start;
-    // endDate = slot.end;
-    // console.log(slot.start)
-    // console.log(slot.end)
-    // console.log(slot)
-  }
 
-  const selectingTimeSlot = (timeSlot) => {
-    console.log(timeSlot);
-    console.log("Hello World")
-    return true;
-  }
   // render() {
     return (
       <section className="Calendar">
@@ -134,8 +145,8 @@ export default function NewBooking(props) {
               console.log(event);
               const events = [...previousState.events]
               const indexOfSelectedEvent = events.indexOf(event)
-              console.log(indexOfSelectedEvent);
-              console.log("this is all the events booked", events);
+              console.log("I am index",indexOfSelectedEvent);
+              console.log("this is all the events booked", events[0]);
               // events.splice(indexOfSelectedEvent, 1);
               return { events };
             })       
