@@ -26,14 +26,14 @@ ActiveRecord::Schema.define(version: 2022_01_15_184248) do
   end
 
   create_table "bookings", force: :cascade do |t|
-    t.string "user_id", limit: 50
+    t.string "title", limit: 20
+    t.string "user_id"
     t.time "start_time"
     t.time "end_time"
-    t.string "amenities_id"
+    t.string "amenity_id"
     t.boolean "admin_id"
     t.string "weekday"
     t.date "date"
-    t.time "timeslot"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2022_01_15_184248) do
   create_table "users", force: :cascade do |t|
     t.string "first_name", limit: 50
     t.string "last_name", limit: 50
+    t.string "email", limit: 50
     t.string "phone", default: "", null: false
     t.string "unit"
     t.boolean "admin"

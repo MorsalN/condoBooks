@@ -25,16 +25,16 @@ export default function NewBooking(props) {
       // });
     }) 
 
-    axios.get('/api/slot', {params:{user_id:1}}) // You can simply make your requests to "/api/whatever you want"
-    .then((response) => {
-      // handle success
-      console.log(response.data) // The entire response from the Rails API
+    // axios.get('/api/slot', {params:{user_id:1}}) // You can simply make your requests to "/api/whatever you want"
+    // .then((response) => {
+    //   // handle success
+    //   console.log(response.data) // The entire response from the Rails API
 
-      console.log(response.data.message) // Just the message
-      // this.setState({
-      //   message: response.data.message
-      // });
-    }) 
+    //   console.log(response.data.message) // Just the message
+    //   // this.setState({
+    //   //   message: response.data.message
+    //   // });
+    // }) 
 
 
   })
@@ -48,7 +48,7 @@ export default function NewBooking(props) {
         end: moment()
           .add(1, "days")
           .toDate(),
-        title: "Event 1"
+        title: "Event"
       }
     ],
 
