@@ -84,6 +84,21 @@ main {
   background: #3b748a;
 }
 
+.back {
+  font-size:1em;
+  /* width: 8vw; */
+  min-width:60px;
+  height: 1vw;
+  min-height:30px;
+  margin:5px;
+  color: white;
+  letter-spacing: 0.05em;
+  font-weight: bold;
+  border-radius: 5px;
+  background: #73639e;
+
+}
+
 .table {
   margin-bottom: 50px;
 }
@@ -100,5 +115,4 @@ main {
   font-weight: bold;
   border-radius: 5px;
   background: #3b748a;
-
 }

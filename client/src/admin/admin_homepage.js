@@ -51,6 +51,7 @@ export default function Amenities() {
           </table>
 
           <button className="add" onClick={handleClickAdd}>Add Amenity</button>
+          {/* <button onClick={() => navigate(-1)}>Go back</button> */}
 
 
       </div>

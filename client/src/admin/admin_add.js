@@ -7,7 +7,7 @@ import '../css/Admin.css'
 
 export default function Add() {
 
-
+  const navigate = useNavigate();
   return (
 
     <section className="Admin">
@@ -61,6 +61,7 @@ export default function Add() {
         </table>
 
         <button className="add">Add Amenity</button>
+        <button className="back"onClick={() => navigate(-1)}>Back</button>
 
       </div>
     </section>

@@ -60,6 +60,7 @@ export default function Manage() {
         </table>
 
         <button className="add" onClick={handleClickAdd}>Add Amenity</button>
+        <button className="back"onClick={() => navigate(-1)}>Back</button>
 
       </div>
     </section>
