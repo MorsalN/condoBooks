@@ -11,6 +11,35 @@ const localizer = momentLocalizer(moment);
 
 export default function NewBooking(props) {
 
+
+  useEffect(() => {
+
+    axios.get('/api/users', {params:{user_id:1}}) // You can simply make your requests to "/api/whatever you want"
+    .then((response) => {
+      // handle success
+      console.log(response.data) // The entire response from the Rails API
+
+      console.log(response.data.message) // Just the message
+      // this.setState({
+      //   message: response.data.message
+      // });
+    }) 
+
+    axios.get('/api/slot', {params:{user_id:1}}) // You can simply make your requests to "/api/whatever you want"
+    .then((response) => {
+      // handle success
+      console.log(response.data) // The entire response from the Rails API
+
+      console.log(response.data.message) // Just the message
+      // this.setState({
+      //   message: response.data.message
+      // });
+    }) 
+
+
+  })
+
+
   const [state, setState] = useState({
      // event represent a booking
      events: [
@@ -53,8 +82,10 @@ export default function NewBooking(props) {
 
   const handleSelect = ({ start, end }) => {
     const title = window.prompt('Book Amenitiy Time')
-    // console.log('handleselect')
-    // console.log('props:',props.events)
+    console.log('handleselect')
+
+
+    console.log('props:',props.events)
     if (title)
       setState({
         events: [
@@ -94,10 +125,22 @@ export default function NewBooking(props) {
           style={{ height: "100%", width: "100%" }}
           selectable ={true}
           //onSelectSlot={this.selectSlotHandler}
-          onSelectEvent={event => alert(event.title)}
+          onSelectEvent={event => 
+          
+            setState((previousState) => {
+              console.log(event);
+              const events = [...previousState.events]
+              const indexOfSelectedEvent = events.indexOf(event)
+              console.log(indexOfSelectedEvent);
+              console.log("this is all the events booked", events);
+              // events.splice(indexOfSelectedEvent, 1);
+              return { events };
+            })       
+
+          }
           onSelectSlot={handleSelect}
         />
-        <button onClick={event => cancel()} >Cancel</button>
+        <button onClick={event => cancel()/*this place should splice the events from onSelectEvent*/} >Cancel</button>
         </div>
       </div>
       </section>
