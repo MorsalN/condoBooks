@@ -10,7 +10,6 @@ class CreateBookings < ActiveRecord::Migration[5.2]
       t.column "admin_id", :boolean
       t.column "weekday", :string
       t.column "date", :date
-      t.column "timeslot", :time
 
 
       t.timestamps
