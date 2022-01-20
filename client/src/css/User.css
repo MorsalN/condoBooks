@@ -33,23 +33,74 @@
 
 .numberCircle {
   border-radius: 50%;
-  width: 36px;
-  height: 36px;
+  width: 26px;
+  height: 26px;
   padding: 8px;
 
-  background: #fff;
+  background: #cbd8d8;
   border: 2px solid #666;
   color: #666;
   text-align: center;
 
-  font: 32px Arial, sans-serif;
+  font: 22px Arial, sans-serif;
+  margin-left: 200%;
 }
 
 .how-book {
   display: flex;
-  justify-content: center;
 }
 
 .step {
   display: flex;
+}
+
+.home-text-1 {
+  margin-right: 150%px;
+}
+
+
+.book {
+  margin-right: 80px;
+}
+
+#customers-user {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+#customers-user td, #customers-user th {
+  /* border: 0.5px solid rgb(243, 242, 242); */
+  padding-right: 60px;
+  padding-left: 60px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+/* #customers tr:nth-child(even){background-color: #f2f2f2;} */
+
+/* #customers-user tr:hover {background-color: #ddd;} */
+
+#customers-user th {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: left;
+  background-color: #acc5bd;
+  /* color: rgb(71, 70, 85); */
+  font-size: 120%;
+}
+
+.new {
+  font-size:1em;
+  /* width: 8vw; */
+  min-width:90px;
+  height: 3vw;
+  min-height:40px;
+  margin:5px;
+  color: white;
+  letter-spacing: 0.05em;
+  font-weight: bold;
+  border-radius: 5px;
+  background: #638a63;
 }
