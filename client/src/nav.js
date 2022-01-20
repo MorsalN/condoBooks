@@ -1,30 +1,43 @@
 import React, { Component } from "react";
-import Logo from './images/home.png'
+import Logo from './images/house.gif'
 import './css/Nav.css'
-import {Link, Redirect} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-// class Nav extends Component {
 
-  export default function Nav(props) {
+export default function Nav(props) {
 
-  // state = {
-  //   redirect: false
-  // }
-  // render(){
+  const navigate = useNavigate();
+
+  const params = useParams()
+  console.log(params)
+
+
+  function handleClickAdmin() {
+    navigate(`/${params.user_id}/amenities`);
+  }
+
+  function handleClickUser() {
+    navigate(`/${params.user_id}/booking`);
+  }
+
+  function handleClick() {
+    navigate(`/`);
+  }
+
   return (
 
     <nav className="navbar">
-          <nav className="navbar_left">
-            {/* <Logo className="navbar_logo" onClick={this.redirectHome}/> */}
-            <img src={Logo} alt ="Logo"className="navbar_logo" onClick={props.redirectHome}/>
-          </nav>
-          <nav className="navbar_right">
-            <button className="navbar_logout" onClick={props.logout}>Logout</button>
-          </nav>
+      <nav className="navbar_left">
+        <img src={Logo} alt="Logo" className="navbar_logo" onClick={handleClick} />
+      </nav>
+      {/* <nav className="navbar_mid">
+      <button className="navbar_admin" onClick={handleClickAdmin}>Admin</button>
+      <button className="navbar_user" onClick={handleClickUser}>User</button>
+      </nav> */}
+      <nav className="navbar_right">
+        <button className="navbar_logout" onClick={props.logout}>Logout</button>
+      </nav>
     </nav>
-
-    )
-  // }
+  )
 }
 
-// export default Nav

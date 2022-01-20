@@ -1,7 +1,7 @@
 .navbar {
   width: 100%;
-  background: white;
-  padding: 0 10px;
+  background: #cbd8d8;
+  padding: 0 5px;
   position: fixed; 
   top: 0;
   z-index:2;
@@ -12,9 +12,9 @@
   flex-grow:1;
 }
 .navbar_logo {
-  padding: 20px;
-  max-width: 100px;
-  width: 9vw;
+  padding: 10px;
+  max-width: 60px;
+  /* width: 9vw; */
 }
 .navbar_right{
   display: flex;
@@ -56,11 +56,12 @@
 .navbar_logout {
   font-size:1em;
   width: 8vw;
-  min-width:90px;
+  min-width:30px;
   height: 3vw;
-  min-height:40px;
+  min-height:30px;
   margin:5px;
   margin-left: 4vw;
+  margin-right: 4vw;
   color: white;
   letter-spacing: 0.05em;
   font-weight: bold;
