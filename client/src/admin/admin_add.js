@@ -3,25 +3,63 @@ import { useNavigate, useParams } from "react-router-dom";
 import "../css/Admin.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import TimePicker from 'react-time-picker';
+import useApplicationData from "../hooks/useApplicationData";
+// import { add } from "nodemon/lib/rules";
 
-export default function Add() {
+
+
+export default function Add(props) {
+
   const [name, setName] = useState("");
   const [capacity, setCapacity] = useState(1);
+  const [start, setStart] = useState('09:00');
+  const [end, setEnd] = useState('22:00');
 
-  function generateNumber() {
-    //   //generate a 6 alpha numeric character
+  const params = useParams()
+  const navigate = useNavigate();
+
+   //generate a 6 alpha numeric character
+   function generateNumber() {
     return Math.floor(Math.random() * 100);
   }
 
-  const addAmenity = function () {
-    //console.log(name, capacity)
+  function validate() {
     const id = generateNumber();
-    const newAmenity = { id, name, capacity };
+      const newAmenity = { id, name, capacity , available_from: "2022-01-22T02:04:01.000Z", available_to: "2023-01-03T02:04:01.000Z"};
 
-    return axios.post('/api/admin/amenities', { newAmenity })
-  };
 
-  const navigate = useNavigate();
+      // axios
+      // .post('/api/admin/amenities', { newAmenity })
+      // .then(function (response) { 
+      //   console.log('response', response.data);
+      //   let data = response.data
+      //   console.log('amenities', amenities)
+      //   setAmenities((prev) => ([...prev, data]))
+      //   navigate(`/${params.user_id}/amenities`, {amenities}) 
+      //   // return setAmenities
+        
+      // })
+      // .catch(function (error) {
+      //   console.log(error);
+      // })
+
+
+  // )
+
+    // .then(res => {
+    //   console.log(res)
+    //   console.log('Amenities', amenities)
+    //   let amenities = props.amenities
+    //   // if (res) {
+      //   // }
+      // }) 
+      
+      props.addAmenity(newAmenity)
+        .then(navigate(`/${params.user_id}/amenities`) )
+  }
+
+ 
   return (
     <section className="Admin">
       <div className="Admin-box">
@@ -40,6 +78,7 @@ export default function Add() {
                     onChange={(e) => setName(e.target.value)}
                   />
                 </form>
+
               </td>
             </tr>
             <tr>
@@ -72,18 +111,28 @@ export default function Add() {
             <tr>
               <td>Times Available</td>
               <td>
-                <select name="rooms" id="rooms">
-                  <option value="option0">Start Time</option>
-                </select>
-                <select name="rooms" id="rooms">
-                  <option value="option0">End Time</option>
-                </select>
+                <label>
+                  Start Time
+                </label>
+                <TimePicker
+                  onChange={setStart}
+                  value={start}
+                />
+
+                <label>
+                  End Time
+                </label>
+                <TimePicker
+                  onChange={setEnd}
+                  value={end}
+                />
+
               </td>
             </tr>
           </tbody>
         </table>
 
-        <button className="add" onClick={addAmenity}>
+        <button className="add" onClick={validate}>
           Add Amenity
         </button>
         <button className="back" onClick={() => navigate(-1)}>

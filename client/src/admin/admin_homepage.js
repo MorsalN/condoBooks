@@ -4,7 +4,7 @@ import '../css/Admin.css'
 import axios from "axios";
 
 
-export default function Amenities() {
+export default function Amenities(props) {
   const navigate = useNavigate();
 
   const params = useParams()
@@ -19,24 +19,27 @@ export default function Amenities() {
     navigate(`/${params.user_id}/add`);
   }
   
-  const [amenities, setAmenities] = useState([])
+  // const [amenities, setAmenities] = useState([])
 
 
-  useEffect(() => {
-    axios
-      .get(`/api/admin/amenities`) // You can simply make your requests to "/api/whatever you want"
-      .then((response) => {
-        setAmenities(response.data)
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  },[]);
+  // useEffect(() => {
+  //   axios
+  //     .get(`/api/admin/amenities`) // You can simply make your requests to "/api/whatever you want"
+  //     .then((response) => {
+  //       setAmenities(response.data)
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // },[]);
+
+  console.log("props.amenities", props.amenities[0])
       
-  const returnedAmenities = amenities.map(
+  const returnedAmenities = props.amenities[0] ? props.amenities.map(
     (room, index) => {
+      // console.log('room',room)
       return(
-      <tr>
+      <tr key={`Room-${index}`}>
       <td>{room.name}</td>
       <td>{room.available_from.substring((room.available_from).indexOf("T") + 1, (room.available_from).lastIndexOf(":") )}</td>
       <td>{room.available_to.substring((room.available_to).indexOf("T") + 1, (room.available_to).lastIndexOf(":") )}</td>
@@ -45,7 +48,7 @@ export default function Amenities() {
       </tr>)
 
     }
-  )
+  ) : []
 
   return (
 
