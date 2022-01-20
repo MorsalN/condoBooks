@@ -4,8 +4,8 @@ class CreateAmenities < ActiveRecord::Migration[5.2]
 
       t.column "name", :string, :limit => 50
       t.column "capacity", :integer
-      t.column "available_from", :time
-      t.column "available_to", :time
+      t.column "available_from", :datetime
+      t.column "available_to", :datetime
       t.column "availability", :boolean, :default => true
       
       t.timestamps

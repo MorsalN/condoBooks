@@ -9,36 +9,37 @@
 Amenity.create!({
   name: 'gym',
   capacity: 10,
-  available_from: '06:00',
-  available_to: '22:00',
+  available_from: 'Fri Jan 21 2022 20:04:01 GMT-0600 (CST)',
+  available_to: 'Mon Jan 2 2023 20:04:01 GMT-0600 (CST)',
   availability: true
 })
 
 Amenity.create!({
   name: 'Social',
   capacity: 10,
-  available_from: '16:00',
-  available_to: '22:00',
+  available_from: 'Fri Jan 21 2022 20:04:01 GMT-0600 (CST)',
+  available_to: 'Mon Jan 2 2023 20:04:01 GMT-0600 (CST)',
   availability: true
 })
 
  Booking.create!({
   title: 'My Booking1',
   user_id: 1,
-  start_time: '10:00',
-  end_time: '11:00',
+  start_time: 'Fri Jan 21 2022 20:04:01 GMT-0600 (CST)',
+  end_time: 'Fri Jan 21 2022 21:04:01 GMT-0600 (CST)',
   amenity_id: 11 ,
-  date: '2022-01-20'
+  weekday: 'Fri Jan 21 2022 21:04:01 GMT-0600 (CST)',
+  date: 'Fri Jan 21 2022 21:04:01 GMT-0600 (CST)'
 })
 
 Booking.create!({
   title: 'My Booking2',
   user_id: 2,
-  start_time: '12:00',
-  end_time: '13:00',
+  start_time: 'Tue Nov 04 2014 14:04:01 GMT-0600 (CST)',
+  end_time: 'Tue Nov 04 2014 14:04:01 GMT-0600 (CST)',
   amenity_id:11 ,
-  weekday: 'Friday',
-  date: '2022-01-21'
+  weekday: 'Fri Jan 21 2022 21:04:01 GMT-0600 (CST)',
+  date: 'Fri Jan 21 2022 21:04:01 GMT-0600 (CST)'
 })
 
 User.create!({

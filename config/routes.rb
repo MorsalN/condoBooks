@@ -9,12 +9,11 @@ Rails.application.routes.draw do
     get '/admin', to: 'amenities#show'
     #get '/bookings', to: 'bookings#index'
     get '/users/:id/bookings', to: 'users#user_bookings'
-    post '/bookings/:id/:id', to: 'bookings#create'
+    post '/bookings/:id/:booking_id', to: 'bookings#create'
     
 
     resources :users, only: [:index]
     resources :amenities, only: [:show]
-    resources :bookings
   
 
     namespace :admin do

@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 2022_01_15_184248) do
   create_table "amenities", force: :cascade do |t|
     t.string "name", limit: 50
     t.integer "capacity"
-    t.time "available_from"
-    t.time "available_to"
+    t.datetime "available_from"
+    t.datetime "available_to"
     t.boolean "availability", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -28,12 +28,12 @@ ActiveRecord::Schema.define(version: 2022_01_15_184248) do
   create_table "bookings", force: :cascade do |t|
     t.string "title", limit: 20
     t.string "user_id"
-    t.time "start_time"
-    t.time "end_time"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.string "amenity_id"
     t.boolean "admin_id"
     t.string "weekday"
-    t.date "date"
+    t.datetime "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
