@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React, { Component,  useEffect } from "react";
 import { Redirect, useNavigate, useParams } from "react-router-dom";
 import '../css/Admin.css'
+import axios from "axios";
 
 
 export default function Amenities() {
@@ -17,6 +18,18 @@ export default function Amenities() {
   function handleClickAdd() {
     navigate(`/${params.user_id}/add`);
   }
+
+  useEffect(() => {
+    axios
+      .get(`/api/admin/amenities`) // You can simply make your requests to "/api/whatever you want"
+      .then((response) => {
+        console.log("amenities response",response)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  },[]);
+      
 
   return (
 

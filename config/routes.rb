@@ -6,18 +6,16 @@ Rails.application.routes.draw do
 
     get '/data', to: 'tests#index'
     # get '/user', to: 'users#index'
-    get '/admin', to: 'amenities#show'
     #get '/bookings', to: 'bookings#index'
     get '/users/:id/bookings', to: 'users#user_bookings'
     post '/bookings/:id/:booking_id', to: 'bookings#create'
+    get '/admin', to: 'amenities#index'
     
-
     resources :users, only: [:index]
     resources :amenities, only: [:show]
-  
-
+    
     namespace :admin do
-      root to: 'amenities#show'
+      root to: 'amenities#index'
       resources :amenities
     end
 
