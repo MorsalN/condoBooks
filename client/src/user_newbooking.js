@@ -29,108 +29,52 @@ export default function NewBooking(props) {
     axios
       .get(`/api/users/${params.user_id}/bookings`) // You can simply make your requests to "/api/whatever you want"
       .then((response) => {
-        console.log("response",response)
-        // setState((prev) => ({
-        //   ...prev,
-        //   events: [
-        //     {
-        //       start: moment(response.data[0].start_time).toDate(),
-        //       end: moment(response.data[0].end_time).toDate(),
-        //       title: response.data[0].title,
-        //     },
-        //   ],
-        // }));
-
-        let appointments = response.data
-        appointments = appointments.map(appointment => {
+        //console.log("response",response)
+        //Need to Map response.data as there are multiple events coming back from server
+        let appointments = response.data;
+        appointments = appointments.map((appointment) => {
           return {
             start: moment.utc(appointment.start_time).toDate(),
             end: moment.utc(appointment.end_time).toDate(),
-            title: appointment.title
-          }
-        })
-        
-        setState ({
-          events: appointments
-        })
-  
+            title: appointment.title,
+          };
+        });
+        setState({
+          events: appointments,
+        });
       })
       .catch(function (error) {
         console.log(error);
       });
-  },[]);
+  }, []);
 
-  // Resets Form to empty values
-  // const reset = function () {
-  //   // setStudent("");
-  //   setState({
-  //     events: [
-  //       {
-  //         start: moment().toDate(),
-  //         end: moment().add(1, "days").toDate(),
-  //         title: "Event 1",
-  //       },
-  //     ],
-  //   });
-  //   // }
-  // };
+  //Generate random number for ID
 
-  // Reset Form and cancels
-  // const cancel = function () {
-  //   reset();
-  //   // props.onCancel();
-  // };
-
-  //This is to stick the selection and bring the alert event
-
-  // const handleSelect = ({ start, end }) => {
-  //   const title = window.prompt("Book Amenitiy Time");
-  //   console.log("handleselect");
-  //   console.log("props:", props.events);
-  //   if (title)
-  //     setState({
-  //       events: [
-  //         ...state.events,
-  //         {
-  //           start,
-  //           end,
-  //           title,
-  //         },
-  //       ],
-  //     });
-  // };
-
-  //generate random id
-   function generateNumber() {
-  //   //generate a 6 alpha numeric character
+  function generateNumber() {
     return Math.floor(Math.random() * 100);
-   }
+  }
 
-    const handleSelect = ({ start, end }) => {
-      const title = window.prompt('Book Amenitiy Time')
-      const id = generateNumber();
-      if(title) {
-      const events = {start, end, title}
-      console.log("events", events)
-      return (
-        axios.post(`/api/bookings/${params.user_id}/${id}`,{events})
-        .then(res => {
+  const handleSelect = ({ start, end }) => {
+    const title = window.prompt("Book Amenitiy Time");
+    const id = generateNumber();
+    if (title) {
+      const events = { start, end, title };
+      console.log("events", events);
+      return axios
+        .post(`/api/bookings/${params.user_id}/${id}`, { events })
+        .then((res) => {
           const newAppointment = {
             start: moment.utc(res.data.start_time).toDate(),
             end: moment.utc(res.data.end_time).toDate(),
-            title: res.data.title
-           } // assuming object { booking_id: 1, start: <date>, end: <data> ... }
+            title: res.data.title,
+          }; // assuming object { booking_id: 1, start: <date>, end: <data> ... }
           setState({
-           ...state,
-           events: [...state.events, newAppointment]
-          })
-              })
-      )
+            ...state,
+            events: [...state.events, newAppointment],
+          });
+        });
     }
-  }
-        
-          
- 
+  };
 
   // render() {
   return (
@@ -158,12 +102,7 @@ export default function NewBooking(props) {
             }
             onSelectSlot={handleSelect}
           />
-          <button
-            // onClick={
-            //   (event) =>
-            //     //cancel() /*this place should splice the events from onSelectEvent*/
-            // }
-          >
+          <button>
             Cancel
           </button>
         </div>
