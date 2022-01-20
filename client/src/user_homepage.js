@@ -26,7 +26,7 @@ export default function Homepage() {
             <tr>
               <td><h1>How To Book:</h1></td>
               <td><div className="numberCircle">1</div></td>
-              <td><p className="home-text-1"><strong>Click </strong>on New Booking</p></td>
+              <td><p className="home-text-1"><strong>Click </strong> New Booking</p></td>
             </tr>
 
             <tr>

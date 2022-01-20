@@ -104,3 +104,46 @@
   border-radius: 5px;
   background: #638a63;
 }
+
+.booked {
+  color: #638a63;
+}
+
+.note {
+  color: rgb(69, 69, 180);
+}
+
+.home {
+  font-size:1em;
+  /* width: 8vw; */
+  min-width:90px;
+  height: 3vw;
+  min-height:40px;
+  margin:5px;
+  color: white;
+  letter-spacing: 0.05em;
+  font-weight: bold;
+  border-radius: 5px;
+  background: #638a63;
+
+}
+
+.cancel {
+  font-size:1em;
+  /* width: 8vw; */
+  min-width:90px;
+  height: 3vw;
+  min-height:40px;
+  margin:5px;
+  color: white;
+  letter-spacing: 0.05em;
+  font-weight: bold;
+  border-radius: 5px;
+  background: #91686e;
+
+}
+
+.summary-buttons {
+  display: flex;
+  justify-content: space-between;
+}
