@@ -1,4 +1,4 @@
-import React, { Component,  useEffect } from "react";
+import React, { Component,  useEffect, useState } from "react";
 import { Redirect, useNavigate, useParams } from "react-router-dom";
 import '../css/Admin.css'
 import axios from "axios";
@@ -8,28 +8,44 @@ export default function Amenities() {
   const navigate = useNavigate();
 
   const params = useParams()
-  console.log(params)
 
   function handleClickManage() {
     navigate(`/${params.user_id}/manage`);
 
   }
 
+  
   function handleClickAdd() {
     navigate(`/${params.user_id}/add`);
   }
+  
+  const [amenities, setAmenities] = useState([])
+
 
   useEffect(() => {
     axios
       .get(`/api/admin/amenities`) // You can simply make your requests to "/api/whatever you want"
       .then((response) => {
-        console.log("amenities response",response)
+        setAmenities(response.data)
       })
       .catch(function (error) {
         console.log(error);
       });
   },[]);
       
+  const returnedAmenities = amenities.map(
+    (room, index) => {
+      return(
+      <tr>
+      <td>{room.name}</td>
+      <td>{room.available_from.substring((room.available_from).indexOf("T") + 1, (room.available_from).lastIndexOf(":") )}</td>
+      <td>{room.available_to.substring((room.available_to).indexOf("T") + 1, (room.available_to).lastIndexOf(":") )}</td>
+      <td>{room.availability ? "All Days" : "Closed"}</td>
+      <td><button className="manage" onClick={handleClickManage}>Manage Amenity</button></td>
+      </tr>)
+
+    }
+  )
 
   return (
 
@@ -46,20 +62,7 @@ export default function Amenities() {
                 <th>Days</th>
                 <th></th>
               </tr>
-              <tr>
-                <td>Gym</td>
-                <td>09:00</td>
-                <td>22:00</td>
-                <td>All Days</td>
-                <td><button className="manage" onClick={handleClickManage}>Manage Amenity</button></td>
-              </tr>
-              <tr>
-                <td>Social</td>
-                <td>09:00</td>
-                <td>22:00</td>
-                <td>All Days</td>
-                <td><button className="manage" onClick={handleClickManage}>Manage Amenity</button></td>
-              </tr>
+              {returnedAmenities}
             </tbody>
           </table>
 
