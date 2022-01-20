@@ -1,15 +1,28 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import '../css/Admin.css'
-
-
-
+import "../css/Admin.css";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function Add() {
+  const [name, setName] = useState("");
+  const [capacity, setCapacity] = useState(1);
+
+  function generateNumber() {
+    //   //generate a 6 alpha numeric character
+    return Math.floor(Math.random() * 100);
+  }
+
+  const addAmenity = function () {
+    //console.log(name, capacity)
+    const id = generateNumber();
+    const newAmenity = { id, name, capacity };
+
+    return axios.post('/api/admin/amenities', { newAmenity })
+  };
 
   const navigate = useNavigate();
   return (
-
     <section className="Admin">
       <div className="Admin-box">
         <h1 className="Admin-title">Add Amenity</h1>
@@ -20,7 +33,12 @@ export default function Add() {
               <td>Amenity Name</td>
               <td>
                 <form>
-                  <input type="text" placeholder="Enter Amenity Name" />
+                  <input
+                    type="text"
+                    placeholder="Enter Amenity Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
                 </form>
               </td>
             </tr>
@@ -35,14 +53,19 @@ export default function Add() {
             <tr>
               <td>Max Capacity for Bookings (Per Hour)</td>
               <td>
-                <select name="rooms" id="rooms">
-                  <option value="option0">1</option>
-                  <option value="option1">2</option>
-                  <option value="option2">5</option>
-                  <option value="option3">10</option>
-                  <option value="option4">20</option>
-                  <option value="option2">50</option>
-                  <option value="option3">100</option>
+                <select
+                  name="rooms"
+                  id="rooms"
+                  value={capacity}
+                  onChange={(e) => setCapacity(e.target.value)}
+                >
+                  <option value={1}>1</option>
+                  <option value={2}>2</option>
+                  <option value={5}>5</option>
+                  <option value={10}>10</option>
+                  <option value={20}>20</option>
+                  <option value={50}>50</option>
+                  <option value={100}>100</option>
                 </select>
               </td>
             </tr>
@@ -60,14 +83,13 @@ export default function Add() {
           </tbody>
         </table>
 
-        <button className="add">Add Amenity</button>
-        <button className="back"onClick={() => navigate(-1)}>Back</button>
-
-        
-
+        <button className="add" onClick={addAmenity}>
+          Add Amenity
+        </button>
+        <button className="back" onClick={() => navigate(-1)}>
+          Back
+        </button>
       </div>
     </section>
-
-  )
-
+  );
 }
