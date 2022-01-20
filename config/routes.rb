@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index]
     resources :amenities, only: [:show]
     
-    namespace :admin do
+    scope :admin do
       root to: 'amenities#index'
       resources :amenities
     end

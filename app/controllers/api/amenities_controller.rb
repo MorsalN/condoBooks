@@ -9,7 +9,7 @@ class Api::AmenitiesController < ApplicationController
   end
 
   def create
-    amenity = Amenity.create!(:name => params["name"], :capacity => params["capacity"], :availability =>params[])
+    amenity = Amenity.create!(:id => params["newAmenity"]["id"], :name => params["newAmenity"]["name"], :capacity => params["newAmenity"]["capacity"])
 
     if (amenity)
       render json: amenity

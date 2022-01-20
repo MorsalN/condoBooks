@@ -18,9 +18,7 @@ export default function Add() {
     const id = generateNumber();
     const newAmenity = { id, name, capacity };
 
-    return axios.post("/api/admin/amenities/", { newAmenity }).then((res) => {
-      console.log(res);
-    });
+    return axios.post('/api/admin/amenities', { newAmenity })
   };
 
   const navigate = useNavigate();
