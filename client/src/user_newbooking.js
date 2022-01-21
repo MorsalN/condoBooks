@@ -104,6 +104,8 @@ export default function NewBooking(props) {
   return (
     <section className="Admin">
       <div className="Admin-box">
+
+
         <td>Select Amenity Room</td>
         <td>
           <select name="rooms" id="rooms" onChange={(e => selectCalender(e.target.value))}>
@@ -112,6 +114,7 @@ export default function NewBooking(props) {
           </select>
         </td>
       </div>
+
 
       {state.currentAmenity && 
       <div className="Calendar">
@@ -125,7 +128,7 @@ export default function NewBooking(props) {
               style={{ height: "100%", width: "100%" }}
               selectable={true}
               //onSelectSlot={this.selectSlotHandler}
-              onSelectEvent={event => alert(event.title)}
+              // onSelectEvent={event => alert(event.title)}
               // onSelectEvent={(event) => setState((previousState) => {
               //   console.log(event);
               //   const events = [...previousState.events];
