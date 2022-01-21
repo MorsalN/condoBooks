@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Amenity.create!({
-  name: 'gym',
+  name: 'Gym Room',
   capacity: 10,
   available_from: 'Fri Jan 21 2022 20:04:01 GMT-0600 (CST)',
   available_to: 'Mon Jan 2 2023 20:04:01 GMT-0600 (CST)',
@@ -15,7 +15,7 @@ Amenity.create!({
 })
 
 Amenity.create!({
-  name: 'Social',
+  name: 'Social Room',
   capacity: 10,
   available_from: 'Fri Jan 21 2022 20:04:01 GMT-0600 (CST)',
   available_to: 'Mon Jan 2 2023 20:04:01 GMT-0600 (CST)',

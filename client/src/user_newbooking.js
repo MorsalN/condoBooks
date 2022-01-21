@@ -49,14 +49,12 @@ export default function NewBooking(props) {
     );
   });
 
-  //Generate random number for ID
-
-  const selectCalender = function(amenity_id){
-     //useEffect to make the get data from backend at every render
+  const selectCalender = function (amenity_id) {
+    //useEffect to make the get data from backend at every render
     axios
       .get(`/api/users/${params.user_id}/${amenity_id}/bookings`) // You can simply make your requests to "/api/whatever you want"
       .then((response) => {
-        console.log("Booking response",response.data)
+        console.log("Booking response", response.data)
         //Need to Map response.data as there are multiple events coming back from server
         let appointments = response.data;
         appointments = appointments.map((appointment) => {
@@ -81,7 +79,7 @@ export default function NewBooking(props) {
   const handleSelect = ({ start, end }) => {
     const title = window.prompt("Book Amenitiy Time");
     if (title) {
-      const events = { start, end, title, currentAmenity:state.currentAmenity };
+      const events = { start, end, title, currentAmenity: state.currentAmenity };
       console.log("events", events);
       return axios
         .post(`/api/bookings/${params.user_id}`, { events })
@@ -105,45 +103,44 @@ export default function NewBooking(props) {
     <section className="Admin">
       <div className="Admin-box">
 
-
-        <td>Select Amenity Room</td>
-        <td>
-          <select name="rooms" id="rooms" onChange={(e => selectCalender(e.target.value))}>
-          <option value="option0">Choose From Options</option>
-            {selectdAmenities}
-          </select>
-        </td>
-      </div>
+            <td><h2>Select Amenity Room</h2></td>
+            <td>
+              <select name="rooms" id="rooms" onChange={(e => selectCalender(e.target.value))}>
+                <option value="option0">Choose From Options</option>
+                {selectdAmenities}
+              </select>
+            </td>
 
 
-      {state.currentAmenity && 
-      <div className="Calendar">
-        <div className="Calendar_box">
-          <div style={{ width: 700, height: 500 }}>
-            <Calendar
-              localizer={localizer}
-              defaultDate={new Date()}
-              defaultView="month"
-              events={state.events}
-              style={{ height: "100%", width: "100%" }}
-              selectable={true}
-              //onSelectSlot={this.selectSlotHandler}
-              // onSelectEvent={event => alert(event.title)}
-              // onSelectEvent={(event) => setState((previousState) => {
-              //   console.log(event);
-              //   const events = [...previousState.events];
-              //   const indexOfSelectedEvent = events.indexOf(event);
-              //   console.log("I am index", indexOfSelectedEvent);
-              //   console.log("this is all the events booked", events[0]);
-              //   // events.splice(indexOfSelectedEvent, 1);
-              //   return { events };
-              // })}
-              onSelectSlot={handleSelect} />
-            <button>Cancel</button>
+      {state.currentAmenity &&
+        <div className="Calendar">
+          <div className="Calendar_box">
+            <div style={{ width: 700, height: 500 }}>
+              <Calendar
+                localizer={localizer}
+                defaultDate={new Date()}
+                defaultView="month"
+                events={state.events}
+                style={{ height: "100%", width: "100%" }}
+                selectable={true}
+                //onSelectSlot={this.selectSlotHandler}
+                // onSelectEvent={event => alert(event.title)}
+                // onSelectEvent={(event) => setState((previousState) => {
+                //   console.log(event);
+                //   const events = [...previousState.events];
+                //   const indexOfSelectedEvent = events.indexOf(event);
+                //   console.log("I am index", indexOfSelectedEvent);
+                //   console.log("this is all the events booked", events[0]);
+                //   // events.splice(indexOfSelectedEvent, 1);
+                //   return { events };
+                // })}
+                onSelectSlot={handleSelect} />
+              <button>Cancel</button>
+            </div>
           </div>
         </div>
+      }
       </div>
-}
     </section>
   );
 }
