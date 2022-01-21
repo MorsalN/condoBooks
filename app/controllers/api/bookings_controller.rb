@@ -1,7 +1,7 @@
 class Api::BookingsController < ApplicationController
   def show
-    @booking = Booking.find(params[:id])
-    render json: @booking
+    @booking = Booking.includes(:amenity).find(params[:id])
+    render json: {booking: @booking, amenity: @booking.amenity }
   end
   
   def capacity

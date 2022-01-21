@@ -86,7 +86,7 @@ const App = () => {
           <Route path='/:user_id/booking' element={<NewBooking />} />
 
           {/* Summary Route (src/user_summary.jsx) */}
-          <Route path='/:user_id/summary' element={<Summary />} />
+          <Route path='/bookings/:booking_id/summary' element={<Summary />} />
 
           {/* Admin - Homepage (src/admin/admin_homepage.jsx) */}
           <Route path='/:user_id/amenities' element={<Amenities amenities={amenities} />} />

@@ -36,7 +36,7 @@ export default function NewBooking(props) {
   //Initial request to get all amenities
   useEffect(() => {
     axios.get(`/api/users/amenities`).then((response) => {
-      console.log("amenities response data", response.data);
+      // console.log("amenities response data", response.data);
       setAmenities(response.data);
     });
   }, []);
@@ -55,7 +55,7 @@ export default function NewBooking(props) {
     axios
       .get(`/api/users/${params.user_id}/${amenity_id}/bookings`) // You can simply make your requests to "/api/whatever you want"
       .then((response) => {
-        console.log("Booking response", response.data)
+        // console.log("Booking response", response.data)
         //Need to Map response.data to convert the incoming data to Calender format
         let appointments = response.data;
         appointments = appointments.map((appointment) => {
@@ -85,24 +85,23 @@ export default function NewBooking(props) {
       return axios
         .post(`/api/bookings/${params.user_id}`, { events })
         .then((res) => {
-          const newAppointment = {
-            start: moment.utc(res.data.start_time).toDate(),
-            end: moment.utc(res.data.end_time).toDate(),
-            title: res.data.title,
-          }; // assuming object { booking_id: 1, start: <date>, end: <data> ... }
-          setState({
-            ...state,
-            events: [...state.events, newAppointment],
-          });
-          console.log("The state has been set");
-          navigate(`/${params.user_id}/summary`);
+          // const newAppointment = {
+          //   start: moment.utc(res.data.start_time).toDate(),
+          //   end: moment.utc(res.data.end_time).toDate(),
+          //   title: res.data.title,
+          // }; // assuming object { booking_id: 1, start: <date>, end: <data> ... }
+          // setState({
+          //   ...state,
+          //   events: [...state.events, newAppointment],
+          // });
+          console.log("The state has been set", res.data.id);
+          // /bookings/:booking_id/summary
+          navigate(`/bookings/${res.data.id}/summary`);
 
         });
     }
   };
 
-
-  // render() {
   return (
     <section className="Admin">
       <div className="Admin-box">
@@ -151,4 +150,6 @@ export default function NewBooking(props) {
       </div>
     </section>
   );
+
+  return { amenities, setAmenities };
 }
