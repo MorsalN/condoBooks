@@ -147,3 +147,12 @@
   display: flex;
   justify-content: space-between;
 }
+
+.room-options {
+  background-color: #b8c5b8;
+  /* margin: 20px; */
+  padding: 10px;
+  border-radius: 5em;
+  text-align: center;
+
+}

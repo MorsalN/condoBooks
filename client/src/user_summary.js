@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
@@ -6,14 +6,10 @@ import { formatDate, formatTimeslot } from "./helpers/date-helper";
 
 
 export default function Summary(props) {
-
   const [booking, setBooking] = useState();
 
   const navigate = useNavigate();
-
   const params = useParams()
-  // console.log('params',params)
-
 
   function handleClickHome() {
     navigate(`/`);
@@ -23,20 +19,20 @@ export default function Summary(props) {
     navigate(`/${params.user_id}/booking`);
   }
 
+  // Getting the booking and amenity data from the back-end
   useEffect(() => {
-    axios.get(`/api/bookings/${params.booking_id}`).then((response) => {
-      // console.log("amenities response data", response.data);
-      setBooking({...response.data.booking, amenity: response.data.amenity});
-      // console.log('summary output', response.data)
-    });
+    axios.get(`/api/bookings/${params.booking_id}`)
+      .then((response) => {
+        setBooking({ ...response.data.booking, amenity: response.data.amenity });
+      });
   }, [params]);
 
+  // If there is no booking
+  if (!booking) {
+    return <p>Loading!</p>
+  }
 
-if (!booking) {
-  return <p>Loading!</p>
-}
-
-console.log('booking:', booking)
+  console.log('booking:', booking)
   return (
     <section className="User">
       <div className="User-box">
