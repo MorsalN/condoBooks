@@ -1,11 +1,8 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../css/Admin.css";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import TimePicker from 'react-time-picker';
-import useApplicationData from "../hooks/useApplicationData";
-// import { add } from "nodemon/lib/rules";
 
 
 
@@ -19,21 +16,22 @@ export default function Add(props) {
   const params = useParams()
   const navigate = useNavigate();
 
-   //generate a 6 alpha numeric character
-   function generateNumber() {
-    return Math.floor(Math.random() * 100);
-  }
+  //  //generate a 6 alpha numeric character
+  //  function generateNumber() {
+  //   return Math.floor(Math.random() * 100);
+  // }
 
+  // Calls addAmenitiy from Hooks then Navigates to Admin Homepage when Admin Clicks Add Amenitiy Button
   function validate() {
-    const id = generateNumber();
-      const newAmenity = { id, name, capacity , available_from: "2022-01-22T02:04:01.000Z", available_to: "2023-01-03T02:04:01.000Z"};
-
-      
-      props.addAmenity(newAmenity)
-        .then(navigate(`/${params.user_id}/amenities`) )
+    // const id = generateNumber();
+    // console.log('start',start);
+    // console.log('end', end)
+    const newAmenity = { name, capacity, available_from: start, available_to: end };
+    props.addAmenity(newAmenity)
+      .then(navigate(`/${params.user_id}/amenities`))
   }
 
- 
+
   return (
     <section className="Admin">
       <div className="Admin-box">
