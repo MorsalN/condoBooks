@@ -27,7 +27,7 @@ Amenity.create!({
   user_id: 1,
   start_time: 'Fri Jan 21 2022 20:04:01 GMT-0600 (CST)',
   end_time: 'Fri Jan 21 2022 21:04:01 GMT-0600 (CST)',
-  amenity_id: 11 ,
+  amenity_id: 1 ,
   weekday: 'Fri Jan 21 2022 21:04:01 GMT-0600 (CST)',
   date: 'Fri Jan 21 2022 21:04:01 GMT-0600 (CST)'
 })
@@ -35,9 +35,9 @@ Amenity.create!({
 Booking.create!({
   title: 'My Booking2',
   user_id: 2,
-  start_time: 'Tue Nov 04 2014 14:04:01 GMT-0600 (CST)',
-  end_time: 'Tue Nov 04 2014 14:04:01 GMT-0600 (CST)',
-  amenity_id:11 ,
+  start_time: 'Sat Jan 22 2022 19:04:01 GMT-0600 (CST)',
+  end_time: 'Sat Jan 22 2022 21:04:01 GMT-0600 (CST)',
+  amenity_id:2 ,
   weekday: 'Fri Jan 21 2022 21:04:01 GMT-0600 (CST)',
   date: 'Fri Jan 21 2022 21:04:01 GMT-0600 (CST)'
 })

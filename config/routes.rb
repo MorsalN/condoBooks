@@ -7,13 +7,13 @@ Rails.application.routes.draw do
     get '/data', to: 'tests#index'
     # get '/user', to: 'users#index'
     #get '/bookings', to: 'bookings#index'
-    get '/users/:id/bookings', to: 'users#user_bookings'
-    post '/bookings/:id/:booking_id', to: 'bookings#create'
+    get '/users/:id/:amenity_id/bookings', to: 'users#user_bookings'
+    post '/bookings/:id/', to: 'bookings#create'
     #user can see all amenities
-    get '/users/:id/amenities', to: 'amenities#index'
+    get '/users/amenities', to: 'amenities#index'
     
     resources :users, only: [:index]
-    resources :amenities, only: [:show]
+    resources :amenities, only: [:index, :show]
     
     scope :admin do
       root to: 'amenities#index'

@@ -6,7 +6,10 @@ class Api::BookingsController < ApplicationController
 
   def create
     puts params
-    booking = Booking.create!(:title => params["events"]["title"], :start_time => params["events"]["start"], :end_time => params["events"]["end"], :user_id => params["id"], :id => params["booking_id"] )
+    #debugger 
+    booking = Booking.create!(:title => params["events"]["title"], :start_time => params["events"]["start"], 
+    :end_time => params["events"]["end"], :user_id => params["id"], 
+    :amenity_id => params["events"]["currentAmenity"])
     if booking
       render json: booking
     else
