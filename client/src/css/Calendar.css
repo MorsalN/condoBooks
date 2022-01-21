@@ -1,5 +1,7 @@
 .Calendar{
-  margin-top: 150px;
+  margin-top: 60px;
+  margin-left: 150px;
+  margin-right: 150px;
   display: flex;
   justify-content: center;
 

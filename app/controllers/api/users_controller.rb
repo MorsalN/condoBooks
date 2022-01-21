@@ -6,8 +6,8 @@ class Api::UsersController < ApplicationController
   end
 
   def user_bookings
-    @booking = User.find(params[:id])
-    render json: @booking.bookings.all
+    @bookings = Booking.where(user_id: params[:id], amenity_id: params[:amenity_id])
+    render json: @bookings
 
   end
 end
