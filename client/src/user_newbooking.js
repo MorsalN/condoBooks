@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Redirect, useParams } from "react-router-dom";
+import { createRoutesFromChildren, Redirect, useParams } from "react-router-dom";
 import axios from "axios";
 import { Calendar, momentLocalizer, TimeGrid } from "react-big-calendar";
 import moment from "moment";
 import "./css/Calendar.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import './css/Admin.css'
 const localizer = momentLocalizer(moment);
 
 export default function NewBooking(props) {
@@ -20,11 +21,64 @@ export default function NewBooking(props) {
     ],
   });
 
-  const setEvents = (events) => setState((prev) => ({ ...prev, events }));
+  //defining state of an Amenity
+  const [amenities, setAmenities] = useState({
+    amenities: [
+      {
+          id: null,
+          name: "",
+          capacity: null,
+          availability: false,
+          available_from: "",
+          available_to: "",
+      },
+    ],
+  });
+
   const params = useParams();
   console.log(params);
 
-  //useEffect to made the get data from backend at every render
+  //Initial request to get all amenities
+  useEffect(() => {
+    axios
+    .get(`/api/users/${params.user_id}/amenities`)
+    .then((response) => {
+      console.log(response.data);
+      let showAmenities = response.data;
+      showAmenities = showAmenities.map((showAmenity) => {
+        return {
+
+          id: showAmenity.id,
+          name: showAmenity.name,
+          capacity: showAmenity.capacity,
+          availability: showAmenity.availability,
+          available_from: showAmenity.available_from,
+          available_to: showAmenity.available_to,
+
+        }
+      });
+      setAmenities({
+        amenities:showAmenities,
+      })
+    });
+  },[]);
+console.log(amenities)
+const selectdAmenities = amenities[0] ? amenities.map(
+  (room, index) => {
+    // console.log('room',room)
+    return(
+      <td>
+        <select name="rooms" id="rooms">
+          <option value={room.id}>{room.name}</option>
+        </select>
+      </td>
+    )
+
+  }
+) : []
+
+
+  //useEffect to make the get data from backend at every render
   useEffect(() => {
     axios
       .get(`/api/users/${params.user_id}/bookings`) // You can simply make your requests to "/api/whatever you want"
@@ -78,19 +132,34 @@ export default function NewBooking(props) {
 
   // render() {
   return (
-    <section className="Calendar">
-      <div className="Calendar_box">
-        <div style={{ width: 700, height: 500 }}>
-          <Calendar
-            localizer={localizer}
-            defaultDate={new Date()}
-            defaultView="month"
-            events={state.events}
-            style={{ height: "100%", width: "100%" }}
-            selectable={true}
-            //onSelectSlot={this.selectSlotHandler}
-            onSelectEvent={(event) =>
-              setState((previousState) => {
+    <section className="Admin">
+      <div className="Admin-box">
+      <td>Select Amenity Room</td>
+              <td>
+                {/* <select name="rooms" id="rooms">
+                  <option value="option0">Choose From Options</option>
+                  <option value="option1">Gym Room</option>
+                  <option value="option2">Party Room Floor 2</option>
+                  <option value="option3">Party Room Floor 48</option>
+                  <option value="option4">Basketball Room</option>
+                </select> */}
+                {selectdAmenities}
+              </td>
+      </div>
+    
+    
+    {/* <div className="Calendar">
+        <div className="Calendar_box">
+          <div style={{ width: 700, height: 500 }}>
+            <Calendar
+              localizer={localizer}
+              defaultDate={new Date()}
+              defaultView="month"
+              events={state.events}
+              style={{ height: "100%", width: "100%" }}
+              selectable={true}
+              //onSelectSlot={this.selectSlotHandler}
+              onSelectEvent={(event) => setState((previousState) => {
                 console.log(event);
                 const events = [...previousState.events];
                 const indexOfSelectedEvent = events.indexOf(event);
@@ -98,15 +167,13 @@ export default function NewBooking(props) {
                 console.log("this is all the events booked", events[0]);
                 // events.splice(indexOfSelectedEvent, 1);
                 return { events };
-              })
-            }
-            onSelectSlot={handleSelect}
-          />
-          <button>
-            Cancel
-          </button>
+              })}
+              onSelectSlot={handleSelect} />
+            <button>Cancel</button>
+          </div>
         </div>
-      </div>
-    </section>
+      </div> */}
+      </section>
+      
   );
 }
