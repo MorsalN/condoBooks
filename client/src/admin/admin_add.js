@@ -28,32 +28,6 @@ export default function Add(props) {
     const id = generateNumber();
       const newAmenity = { id, name, capacity , available_from: "2022-01-22T02:04:01.000Z", available_to: "2023-01-03T02:04:01.000Z"};
 
-
-      // axios
-      // .post('/api/admin/amenities', { newAmenity })
-      // .then(function (response) { 
-      //   console.log('response', response.data);
-      //   let data = response.data
-      //   console.log('amenities', amenities)
-      //   setAmenities((prev) => ([...prev, data]))
-      //   navigate(`/${params.user_id}/amenities`, {amenities}) 
-      //   // return setAmenities
-        
-      // })
-      // .catch(function (error) {
-      //   console.log(error);
-      // })
-
-
-  // )
-
-    // .then(res => {
-    //   console.log(res)
-    //   console.log('Amenities', amenities)
-    //   let amenities = props.amenities
-    //   // if (res) {
-      //   // }
-      // }) 
       
       props.addAmenity(newAmenity)
         .then(navigate(`/${params.user_id}/amenities`) )
