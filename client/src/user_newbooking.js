@@ -28,9 +28,7 @@ export default function NewBooking(props) {
 
   //defining state of an Amenity
   const [amenities, setAmenities] = useState([]);
-
   const params = useParams();
-  console.log(params);
 
   //Initial request to get all amenities
   useEffect(() => {
@@ -39,8 +37,7 @@ export default function NewBooking(props) {
       setAmenities(response.data);
     });
   }, []);
-  console.log("Printing amenities", amenities);
-
+  //This will display amenities in drop down list
   const selectdAmenities = amenities.map((room, index) => {
     return (
       <option key={index} value={room.id}>
@@ -49,13 +46,14 @@ export default function NewBooking(props) {
     );
   });
 
+  //Function to display Calender on the basis of selected amenity
+
   const selectCalender = function (amenity_id) {
-    //useEffect to make the get data from backend at every render
     axios
       .get(`/api/users/${params.user_id}/${amenity_id}/bookings`) // You can simply make your requests to "/api/whatever you want"
       .then((response) => {
         console.log("Booking response", response.data)
-        //Need to Map response.data as there are multiple events coming back from server
+        //Need to Map response.data to convert the incoming data to Calender format
         let appointments = response.data;
         appointments = appointments.map((appointment) => {
           return {
@@ -75,7 +73,7 @@ export default function NewBooking(props) {
 
   }
 
-
+//Function to save the event in database
   const handleSelect = ({ start, end }) => {
     const title = window.prompt("Book Amenitiy Time");
     if (title) {
@@ -123,17 +121,21 @@ export default function NewBooking(props) {
                 events={state.events}
                 style={{ height: "100%", width: "100%" }}
                 selectable={true}
+                timeslots={4} 
+                min={new Date(2008, 0, 1, 8, 0)} // 8.00 AM
+                max={new Date(2008, 0, 1, 17, 0)}
                 //onSelectSlot={this.selectSlotHandler}
-                // onSelectEvent={event => alert(event.title)}
-                // onSelectEvent={(event) => setState((previousState) => {
-                //   console.log(event);
-                //   const events = [...previousState.events];
-                //   const indexOfSelectedEvent = events.indexOf(event);
-                //   console.log("I am index", indexOfSelectedEvent);
-                //   console.log("this is all the events booked", events[0]);
-                //   // events.splice(indexOfSelectedEvent, 1);
-                //   return { events };
-                // })}
+                //onSelectEvent={event => alert(event.title)}
+                onSelectEvent={(event) => setState((previousState) => {
+                  console.log(event);
+                  const events = [...previousState.events];
+                  const indexOfSelectedEvent = events.indexOf(event);
+                  console.log("I am index", indexOfSelectedEvent);
+                  console.log("this is all the events booked", events[0]);
+                  //console.log("start and end", state.amenities.start_time)
+                  // events.splice(indexOfSelectedEvent, 1);
+                  return { events };
+                })}
                 onSelectSlot={handleSelect} />
               <button>Cancel</button>
             </div>

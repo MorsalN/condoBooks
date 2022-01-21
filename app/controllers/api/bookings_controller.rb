@@ -3,7 +3,11 @@ class Api::BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
     render json: @booking
   end
-
+  
+  def capacity
+   
+  end
+  
   def create
     puts params
     #debugger 
@@ -16,4 +20,6 @@ class Api::BookingsController < ApplicationController
       render json: booking.errors
     end
    end
-end
+   
+
+  end
