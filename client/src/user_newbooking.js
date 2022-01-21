@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   createRoutesFromChildren,
-  Redirect,
+  useNavigate,
   useParams,
 } from "react-router-dom";
 import axios from "axios";
@@ -25,6 +25,9 @@ export default function NewBooking(props) {
       },
     ],
   });
+
+  // Navigate and Params required to redirect to Summary Page
+  const navigate = useNavigate();
 
   //defining state of an Amenity
   const [amenities, setAmenities] = useState([]);
@@ -91,6 +94,9 @@ export default function NewBooking(props) {
             ...state,
             events: [...state.events, newAppointment],
           });
+          console.log("The state has been set");
+          navigate(`/${params.user_id}/summary`);
+
         });
     }
   };
