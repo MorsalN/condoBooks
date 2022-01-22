@@ -82,6 +82,11 @@ export default function NewBooking(props) {
       return axios
         .post(`/api/bookings/${params.user_id}`, { events })
         .then((res) => {
+          console.log(res.data)
+          if(res.data.message === "Error")
+          {
+            alert("Max Capacity reached for this hour pls select other slot")
+          }
           const newAppointment = {
             start: moment.utc(res.data.start_time).toDate(),
             end: moment.utc(res.data.end_time).toDate(),
@@ -122,8 +127,8 @@ export default function NewBooking(props) {
                 style={{ height: "100%", width: "100%" }}
                 selectable={true}
                 timeslots={4} 
-                min={new Date(2008, 0, 1, 8, 0)} // 8.00 AM
-                max={new Date(2008, 0, 1, 17, 0)}
+                // min={new Date(2008, 0, 1, 8, 0)} // 8.00 AM
+                // max={new Date(2008, 0, 1, 17, 0)}
                 //onSelectSlot={this.selectSlotHandler}
                 //onSelectEvent={event => alert(event.title)}
                 onSelectEvent={(event) => setState((previousState) => {
