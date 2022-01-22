@@ -58,57 +58,87 @@ export default function NewBooking(props) {
         // console.log("Booking response", response.data)
         //Need to Map response.data to convert the incoming data to Calender format
         let appointments = response.data;
+        console.log("appointments", appointments)
         appointments = appointments.map((appointment) => {
           return {
             start: moment.utc(appointment.start_time).toDate(),
             end: moment.utc(appointment.end_time).toDate(),
             title: appointment.title,
+            id: appointment.id
           };
         });
         setState({
           events: appointments,
-          currentAmenity: amenity_id
+          currentAmenity: amenity_id,
         });
       })
       .catch(function (error) {
         console.log(error);
       });
-
-  }
+  };
 
   //Function to save the event in database
   const handleSelect = ({ start, end }) => {
     const title = window.prompt("Book Amenitiy Time");
     if (title) {
-      const events = { start, end, title, currentAmenity: state.currentAmenity };
+      const events = {
+        start,
+        end,
+        title,
+        currentAmenity: state.currentAmenity,
+      };
       return axios
         .post(`/api/bookings/${params.user_id}`, { events })
         .then((res) => {
-          if(res.data.message === "Error")
-          {
-            alert("Max Capacity reached for this hour pls select other slot")
+          if (res.data.message === "Error") {
+            alert("Max Capacity reached for this hour pls select other slot");
             navigate(`/1/booking`);
-          } else{
-          navigate(`/bookings/${res.data.id}/summary`);
+          } else {
+            navigate(`/bookings/${res.data.id}/summary`);
           }
         });
+    }
+  };
+
+  const deleteBooking = (booking) => {
+    console.log("booing info", booking)
+    let confirmation = window.confirm(
+      `Are you sure you want to delete the ${booking.title}?`
+    );
+    if (confirmation) {
+      //send delete request to backend servers
+      return axios
+        .delete(`/api/bookings/${booking.id}`, { booking })
+        .then(() => {
+          confirmation = window.confirm("Appointment Deleted");
+          window.location.reload();
+        }
+          )
+    }
+     else {
+      return alert(`You cant delete this ${booking.title}"`);
     }
   };
 
   return (
     <section className="Admin">
       <div className="Admin-box">
-
-        <td><h2>Select Amenity Room</h2></td>
         <td>
-          <select className="room-options" name="rooms" id="rooms" onChange={(e => selectCalender(e.target.value))}>
+          <h2>Select Amenity Room</h2>
+        </td>
+        <td>
+          <select
+            className="room-options"
+            name="rooms"
+            id="rooms"
+            onChange={(e) => selectCalender(e.target.value)}
+          >
             <option value="options">Choose From Options</option>
             {selectdAmenities}
           </select>
         </td>
 
-
-        {state.currentAmenity &&
+        {state.currentAmenity && (
           <div className="Calendar">
             <div className="Calendar_box">
               <div style={{ width: 700, height: 500 }}>
@@ -124,17 +154,16 @@ export default function NewBooking(props) {
                   max={new Date(2008, 0, 1, 22, 0)}
                   //onSelectSlot={this.selectSlotHandler}
                   //onSelectEvent={event => alert(event.title)}
-                  onSelectEvent={(event) => setState((previousState) => {
-                    const events = [...previousState.events];
-                    const indexOfSelectedEvent = events.indexOf(event);
-                    return { events };
-                  })}
-                  onSelectSlot={handleSelect} />
+                  onSelectEvent={(e) => {
+                    deleteBooking(e);
+                  }}
+                  onSelectSlot={handleSelect}
+                />
                 <button>Cancel</button>
               </div>
             </div>
           </div>
-        }
+        )}
       </div>
     </section>
   );

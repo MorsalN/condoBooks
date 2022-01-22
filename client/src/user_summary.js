@@ -16,8 +16,25 @@ export default function Summary(props) {
   }
 
   function handleClickCancel() {
-    navigate(`/${params.user_id}/booking`);
-  }
+    //navigate(`/${params.user_id}/booking`);
+    console.log("booing info", booking)
+    let confirmation = window.confirm(
+      `Are you sure you want to delete the ${booking.title}?`
+    );
+    if (confirmation) {
+      //send delete request to backend servers
+      return axios
+        .delete(`/api/bookings/${booking.id}`, { booking })
+        .then(() => {
+          confirmation = window.confirm("Appointment Deleted");
+          navigate(`/${params.user_id}/booking`);
+        }
+          )
+    }
+     else {
+      return alert(`You cant delete this ${booking.title}"`);
+    }
+  };
 
   // Getting the booking and amenity data from the back-end
   useEffect(() => {
@@ -61,7 +78,7 @@ export default function Summary(props) {
         <p className="note">Please note that admin may make changes if need be. </p>
 
         <div className="summary-buttons">
-          <button className="cancel" onClick={handleClickCancel}>Cancel</button>
+          <button className="cancel" onClick={(e) => {handleClickCancel(e)}}>Cancel</button>
           <button className="home" onClick={handleClickHome}>Home</button>
 
         </div>

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     post '/bookings/:id/', to: 'bookings#create'
     #user can see all amenities
     get '/users/amenities', to: 'amenities#index'
+    delete '/bookings/:id', to: 'bookings#destroy'
     
     resources :users, only: [:index]
     resources :amenities, only: [:index, :show]
