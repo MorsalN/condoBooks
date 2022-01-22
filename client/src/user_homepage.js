@@ -12,7 +12,8 @@ export default function Homepage() {
 
 
   function handleClick() {
-    navigate(`/${params.user_id}/booking`);
+    //navigate(`/${params.user_id}/booking`);
+    navigate(`/1/booking`);
   }
     return (
       <section className="User">

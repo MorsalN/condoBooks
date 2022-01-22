@@ -27,13 +27,6 @@ Rails.application.routes.draw do
   
     end
 
-    # namespace :admin do
-    #   resources: amenities to: ''
-    #   root to: 'amenities#index'
-    #   resources :amenities
-    # end
-
-
   end
 
   
