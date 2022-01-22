@@ -7,10 +7,10 @@ This project is a platform that allows amenities to be booked without the need o
 !["Homepage"]()
 
 ### User stories
-!["User Stories"]()
+!["User Stories"](https://github.com/DarkArtsNinja/final_project/blob/master/docs/stories.png)
 
 ### Database Design
-!["Entity Relation Diagram"]()
+!["Entity Relation Diagram"](https://github.com/DarkArtsNinja/final_project/blob/master/docs/erd.png)
 
 
 ## Dependencies
