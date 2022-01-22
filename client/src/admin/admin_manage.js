@@ -95,14 +95,14 @@ export default function Manage() {
             <tr>
               <td>Max Capacity for Bookings (Per Hour)</td>
               <td>
-              <select name="rooms" id="rooms" onChange= {(event) => setSelectedCapacity(event.target.innerHTML)}>
-                  <option value="option0">1</option>
-                  <option value="option1">2</option>
-                  <option value="option2">5</option>
-                  <option value="option3">10</option>
-                  <option value="option4">20</option>
-                  <option value="option2">50</option>
-                  <option value="option3">100</option>
+              <select name="rooms" id="rooms" onChange= {(event) => setSelectedCapacity(event.target.value)}>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
               </select>
                 </td>
             </tr>

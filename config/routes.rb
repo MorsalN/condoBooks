@@ -20,10 +20,11 @@ Rails.application.routes.draw do
     scope :admin do
       root to: 'amenities#index'
       resources :amenities
+    end
+
     scope 'admin' do
       resources :amenities, only: [:index, :destroy, :put]
   
-      edit_amenities
     end
 
     # namespace :admin do

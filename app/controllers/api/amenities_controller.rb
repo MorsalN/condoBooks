@@ -24,8 +24,17 @@ class Api::AmenitiesController < ApplicationController
 
   def update
     @amenity = Amenity.find params[:id]
-    Rails.logger.debug @aminity.inspect
+    puts params
+
+
     #make sure amnity exists, if exists then update. save, else return an error
+    if @amenity.valid?
+      
+      @amenity.update!(capacity: params[:capacity])
+      
+    end
+
+
   end
 
 end
