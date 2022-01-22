@@ -87,8 +87,10 @@ export default function NewBooking(props) {
           if(res.data.message === "Error")
           {
             alert("Max Capacity reached for this hour pls select other slot")
-          }
+            navigate(`/1/booking`);
+          } else{
           navigate(`/bookings/${res.data.id}/summary`);
+          }
         });
     }
   };
@@ -117,9 +119,9 @@ export default function NewBooking(props) {
                   events={state.events}
                   style={{ height: "100%", width: "100%" }}
                   selectable={true}
-                  timeslots={4}
-                  min={new Date(2008, 0, 1, 8, 0)} // 8.00 AM
-                  max={new Date(2008, 0, 1, 17, 0)}
+                  timeslots={2}
+                  min={new Date(2008, 0, 1, 6, 0)} // 8.00 AM
+                  max={new Date(2008, 0, 1, 22, 0)}
                   //onSelectSlot={this.selectSlotHandler}
                   //onSelectEvent={event => alert(event.title)}
                   onSelectEvent={(event) => setState((previousState) => {
