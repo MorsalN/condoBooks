@@ -158,8 +158,10 @@ export default function NewBooking(props) {
                   style={{ height: "100%", width: "100%" }}
                   selectable={true}
                   timeslots={2}
-                  min={(state.availableFrom)} // 8.00 AM
-                  max={(state.availabelTo)}
+                  // min={(state.availableFrom)} // 8.00 AM
+                  // max={(state.availabelTo)}
+                  min={new Date(2008, 0, 1, 6, 0)} // 8.00 AM
+                  max={new Date(2008, 0, 1, 22, 0)}
                   //onSelectSlot={this.selectSlotHandler}
                   //onSelectEvent={event => alert(event.title)}
                   onSelectEvent={(e) => {
