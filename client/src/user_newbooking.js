@@ -60,6 +60,8 @@ export default function NewBooking(props) {
       .then((response) => {
         console.log("Booking response", response)
         console.log("response[1].data.available_from,", response[1].data.available_from)
+        console.log("response[1].data.available_from,", response[1].data.available_to)
+        
         //Need to Map response.data to convert the incoming data to Calender format
         let appointments = response[0].data;
         console.log("appointments", appointments)
