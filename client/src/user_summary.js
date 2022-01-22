@@ -49,7 +49,7 @@ export default function Summary(props) {
             </tr>
 
             <tr>
-              <td><h3>Booking Date and Time</h3></td>
+              <td><h3>Booking Time</h3></td>
               <td>
                 {formatTimeslot(booking.start_time, booking.end_time)}
               </td>
@@ -59,8 +59,8 @@ export default function Summary(props) {
         </table>
 
         <p className="note">Please note that admin may make changes if need be. </p>
-
         <div className="summary-buttons">
+
           <button className="cancel" onClick={handleClickCancel}>Cancel</button>
           <button className="home" onClick={handleClickHome}>Home</button>
 

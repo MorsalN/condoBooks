@@ -29,6 +29,8 @@ export default function Nav(props) {
     <nav className="navbar">
       <nav className="navbar_left">
         <img src={Logo} alt="Logo" className="navbar_logo" onClick={handleClick} />
+        <div className="condo"><strong>Condo</strong></div>
+        <div className="condo-books">Books</div>
       </nav>
       {/* <nav className="navbar_mid">
       <button className="navbar_admin" onClick={handleClickAdmin}>Admin</button>
