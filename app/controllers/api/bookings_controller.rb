@@ -3,6 +3,13 @@ class Api::BookingsController < ApplicationController
     @booking = Booking.includes(:amenity).find(params[:id])
     render json: {booking: @booking, amenity: @booking.amenity }
   end
+
+  def destroy
+    puts params
+    @deleteBooking = Booking.find params[:id]
+    @deleteBooking.destroy
+
+  end
   
   def capacity(params)
     totalBookings = Booking.where(amenity_id: params["events"]["currentAmenity"], 
