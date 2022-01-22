@@ -14,11 +14,12 @@ const localizer = momentLocalizer(moment);
 
 export default function NewBooking(props) {
   //defining state of an Amenity
+  console.log("props in newBooking", props)
   const [amenities, setAmenities] = useState([]);
   //defining state of the event
   const [state, setState] = useState({
     // event represent a booking
-    currentAmenity: null,
+    currentAmenity: null, availableFrom: "", availabelTo: "",
     events: [
       {
         start: moment().toDate(),
@@ -52,12 +53,15 @@ export default function NewBooking(props) {
 
   //Function to display Calender on the basis of selected amenity
   const selectCalender = function (amenity_id) {
-    axios
-      .get(`/api/users/${params.user_id}/${amenity_id}/bookings`) // You can simply make your requests to "/api/whatever you want"
+    Promise.all([
+    axios.get(`/api/users/${params.user_id}/${amenity_id}/bookings`), // You can simply make your requests to "/api/whatever you want"
+    axios.get(`/api/amenities/${amenity_id}`)
+    ])
       .then((response) => {
-        // console.log("Booking response", response.data)
+        console.log("Booking response", response)
+        console.log("response[1].data.available_from,", response[1].data.available_from)
         //Need to Map response.data to convert the incoming data to Calender format
-        let appointments = response.data;
+        let appointments = response[0].data;
         console.log("appointments", appointments)
         appointments = appointments.map((appointment) => {
           return {
@@ -70,6 +74,8 @@ export default function NewBooking(props) {
         setState({
           events: appointments,
           currentAmenity: amenity_id,
+          availableFrom: response[1].data.available_from,
+          availableTo: response[1].data.available_to
         });
       })
       .catch(function (error) {
@@ -150,8 +156,8 @@ export default function NewBooking(props) {
                   style={{ height: "100%", width: "100%" }}
                   selectable={true}
                   timeslots={2}
-                  min={new Date(2008, 0, 1, 6, 0)} // 8.00 AM
-                  max={new Date(2008, 0, 1, 22, 0)}
+                  min={(state.availableFrom)} // 8.00 AM
+                  max={(state.availabelTo)}
                   //onSelectSlot={this.selectSlotHandler}
                   //onSelectEvent={event => alert(event.title)}
                   onSelectEvent={(e) => {
@@ -159,7 +165,6 @@ export default function NewBooking(props) {
                   }}
                   onSelectSlot={handleSelect}
                 />
-                <button>Cancel</button>
               </div>
             </div>
           </div>

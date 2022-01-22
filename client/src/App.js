@@ -83,7 +83,7 @@ const App = () => {
           <Route path='/' element={<Homepage />} />
 
           {/* New Amenity Booking (src/user_newbooking.jsx) */}
-          <Route path='/:user_id/booking' element={<NewBooking />} />
+          <Route path='/:user_id/booking' element={<NewBooking amenities={amenities}/>} />
 
           {/* Summary Route (src/user_summary.jsx) */}
           <Route path='/bookings/:booking_id/summary' element={<Summary />} />
