@@ -9,12 +9,18 @@
 }
 
 .User-box {
-  width: 100%;
+  width: 50%;
   display: flex;
   align-items: center;
   flex-direction: column;
+  /* background-color: rgb(235, 212, 186); */
+  /* background-color: #f0eae2; */
+  background-color: #ffffff;
+  border: 3px solid #f0eae2;
+  border-radius: 5em;
+  margin-bottom: 2em;
+  margin-top: -2em;
   
-
 }
 
 .User-title {
@@ -33,17 +39,17 @@
 
 .numberCircle {
   border-radius: 50%;
-  width: 26px;
-  height: 26px;
+  width: 36px;
+  height: 36px;
   padding: 8px;
 
-  background: #cbd8d8;
+  background: #ffffff;
   border: 2px solid #666;
   color: #666;
   text-align: center;
 
-  font: 22px Arial, sans-serif;
-  margin-left: 200%;
+  font: 30px Arial, sans-serif;
+  /* margin-left: 150%; */
 }
 
 .how-book {
@@ -55,7 +61,8 @@
 }
 
 .home-text-1 {
-  margin-right: 150%px;
+  font-size: 22px;
+  margin-right: -3em;
 }
 
 
@@ -72,8 +79,8 @@
 
 #customers-user td, #customers-user th {
   /* border: 0.5px solid rgb(243, 242, 242); */
-  padding-right: 60px;
-  padding-left: 60px;
+  padding-right: 55px;
+  padding-left: 40px;
   padding-top: 15px;
   padding-bottom: 15px;
 }
@@ -97,16 +104,17 @@
   min-width:90px;
   height: 3vw;
   min-height:40px;
-  margin:5px;
+  margin:30px;
   color: white;
   letter-spacing: 0.05em;
-  font-weight: bold;
+  /* font-weight: bold; */
   border-radius: 5px;
   background: #638a63;
 }
 
 .booked {
   color: #638a63;
+  margin-left: 2.5em;
 }
 
 .note {
@@ -122,7 +130,7 @@
   margin:5px;
   color: white;
   letter-spacing: 0.05em;
-  font-weight: bold;
+  /* font-weight: bold; */
   border-radius: 5px;
   background: #638a63;
 
@@ -137,7 +145,7 @@
   margin:5px;
   color: white;
   letter-spacing: 0.05em;
-  font-weight: bold;
+  /* font-weight: bold; */
   border-radius: 5px;
   background: #91686e;
 
@@ -146,6 +154,7 @@
 .summary-buttons {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 2em;
 }
 
 .room-options {
