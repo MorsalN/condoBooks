@@ -132,6 +132,5 @@ export default function NewBooking(props) {
       </div>
     </section>
   );
-
   return { amenities, setAmenities };
 }
