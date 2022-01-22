@@ -1,9 +1,13 @@
 class Api::BookingsController < ApplicationController
   def show
-    @booking = Booking.find(params[:id])
-    render json: @booking
+    @booking = Booking.includes(:amenity).find(params[:id])
+    render json: {booking: @booking, amenity: @booking.amenity }
   end
-
+  
+  def capacity
+   
+  end
+  
   def create
     puts params
     #debugger 
@@ -16,4 +20,6 @@ class Api::BookingsController < ApplicationController
       render json: booking.errors
     end
    end
-end
+   
+
+  end

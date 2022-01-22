@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   createRoutesFromChildren,
-  Redirect,
+  useNavigate,
   useParams,
 } from "react-router-dom";
 import axios from "axios";
@@ -13,6 +13,8 @@ import "./css/Admin.css";
 const localizer = momentLocalizer(moment);
 
 export default function NewBooking(props) {
+  //defining state of an Amenity
+  const [amenities, setAmenities] = useState([]);
   //defining state of the event
   const [state, setState] = useState({
     // event represent a booking
@@ -26,21 +28,20 @@ export default function NewBooking(props) {
     ],
   });
 
-  //defining state of an Amenity
-  const [amenities, setAmenities] = useState([]);
+  // Navigate and Params required to redirect to Summary Page
+  const navigate = useNavigate();
 
   const params = useParams();
-  console.log(params);
 
   //Initial request to get all amenities
   useEffect(() => {
     axios.get(`/api/users/amenities`).then((response) => {
-      console.log("amenities response data", response.data);
+      // console.log("amenities response data", response.data);
       setAmenities(response.data);
     });
   }, []);
-  console.log("Printing amenities", amenities);
 
+  //This will display amenities in drop down list
   const selectdAmenities = amenities.map((room, index) => {
     return (
       <option key={index} value={room.id}>
@@ -49,13 +50,13 @@ export default function NewBooking(props) {
     );
   });
 
+  //Function to display Calender on the basis of selected amenity
   const selectCalender = function (amenity_id) {
-    //useEffect to make the get data from backend at every render
     axios
       .get(`/api/users/${params.user_id}/${amenity_id}/bookings`) // You can simply make your requests to "/api/whatever you want"
       .then((response) => {
-        console.log("Booking response", response.data)
-        //Need to Map response.data as there are multiple events coming back from server
+        // console.log("Booking response", response.data)
+        //Need to Map response.data to convert the incoming data to Calender format
         let appointments = response.data;
         appointments = appointments.map((appointment) => {
           return {
@@ -75,15 +76,15 @@ export default function NewBooking(props) {
 
   }
 
-
+  //Function to save the event in database
   const handleSelect = ({ start, end }) => {
     const title = window.prompt("Book Amenitiy Time");
     if (title) {
       const events = { start, end, title, currentAmenity: state.currentAmenity };
-      console.log("events", events);
       return axios
         .post(`/api/bookings/${params.user_id}`, { events })
         .then((res) => {
+<<<<<<< HEAD
           const newAppointment = {
             start: moment.utc(res.data.start_time).toDate(),
             end: moment.utc(res.data.end_time).toDate(),
@@ -94,6 +95,9 @@ export default function NewBooking(props) {
             ...state,
             events: [...state.events, newAppointment],
           });
+=======
+          navigate(`/bookings/${res.data.id}/summary`);
+>>>>>>> 53a7ade03ec2b3aea86ea138930cf7e4e76af014
         });
 =======
            ...state,
@@ -105,48 +109,47 @@ export default function NewBooking(props) {
     }
   };
 
-
-  // render() {
   return (
 <<<<<<< HEAD
     <section className="Admin">
       <div className="Admin-box">
 
-            <td><h2>Select Amenity Room</h2></td>
-            <td>
-              <select name="rooms" id="rooms" onChange={(e => selectCalender(e.target.value))}>
-                <option value="option0">Choose From Options</option>
-                {selectdAmenities}
-              </select>
-            </td>
+        <td><h2>Select Amenity Room</h2></td>
+        <td>
+          <select className="room-options" name="rooms" id="rooms" onChange={(e => selectCalender(e.target.value))}>
+            <option value="options">Choose From Options</option>
+            {selectdAmenities}
+          </select>
+        </td>
 
 
-      {state.currentAmenity &&
-        <div className="Calendar">
-          <div className="Calendar_box">
-            <div style={{ width: 700, height: 500 }}>
-              <Calendar
-                localizer={localizer}
-                defaultDate={new Date()}
-                defaultView="month"
-                events={state.events}
-                style={{ height: "100%", width: "100%" }}
-                selectable={true}
-                //onSelectSlot={this.selectSlotHandler}
-                // onSelectEvent={event => alert(event.title)}
-                // onSelectEvent={(event) => setState((previousState) => {
-                //   console.log(event);
-                //   const events = [...previousState.events];
-                //   const indexOfSelectedEvent = events.indexOf(event);
-                //   console.log("I am index", indexOfSelectedEvent);
-                //   console.log("this is all the events booked", events[0]);
-                //   // events.splice(indexOfSelectedEvent, 1);
-                //   return { events };
-                // })}
-                onSelectSlot={handleSelect} />
-              <button>Cancel</button>
+        {state.currentAmenity &&
+          <div className="Calendar">
+            <div className="Calendar_box">
+              <div style={{ width: 700, height: 500 }}>
+                <Calendar
+                  localizer={localizer}
+                  defaultDate={new Date()}
+                  defaultView="month"
+                  events={state.events}
+                  style={{ height: "100%", width: "100%" }}
+                  selectable={true}
+                  timeslots={4}
+                  min={new Date(2008, 0, 1, 8, 0)} // 8.00 AM
+                  max={new Date(2008, 0, 1, 17, 0)}
+                  //onSelectSlot={this.selectSlotHandler}
+                  //onSelectEvent={event => alert(event.title)}
+                  onSelectEvent={(event) => setState((previousState) => {
+                    const events = [...previousState.events];
+                    const indexOfSelectedEvent = events.indexOf(event);
+                    return { events };
+                  })}
+                  onSelectSlot={handleSelect} />
+                <button>Cancel</button>
+              </div>
             </div>
           </div>
+<<<<<<< HEAD
 =======
     <section className="Calendar">
       <div className="Calendar_box">
@@ -183,7 +186,12 @@ export default function NewBooking(props) {
 >>>>>>> edit_amenities
         </div>
       }
+=======
+        }
+>>>>>>> 53a7ade03ec2b3aea86ea138930cf7e4e76af014
       </div>
     </section>
   );
+
+  return { amenities, setAmenities };
 }
