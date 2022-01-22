@@ -11,15 +11,6 @@ export default function Nav(props) {
   const params = useParams()
   console.log(params)
 
-
-  function handleClickAdmin() {
-    navigate(`/${params.user_id}/amenities`);
-  }
-
-  function handleClickUser() {
-    navigate(`/${params.user_id}/booking`);
-  }
-
   function handleClick() {
     navigate(`/`);
   }
@@ -27,15 +18,12 @@ export default function Nav(props) {
   return (
 
     <nav className="navbar">
-      <nav className="navbar_left">
-        <img src={Logo} alt="Logo" className="navbar_logo" onClick={handleClick} />
+      <nav className="navbar_left" onClick={handleClick}>
+        <img src={Logo} alt="Logo" className="navbar_logo"  />
         <div className="condo"><strong>Condo</strong></div>
         <div className="condo-books">Books</div>
       </nav>
-      {/* <nav className="navbar_mid">
-      <button className="navbar_admin" onClick={handleClickAdmin}>Admin</button>
-      <button className="navbar_user" onClick={handleClickUser}>User</button>
-      </nav> */}
+  
       <nav className="navbar_right">
         <button className="navbar_logout" onClick={props.logout}>Logout</button>
       </nav>
