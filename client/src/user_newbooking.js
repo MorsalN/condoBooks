@@ -84,33 +84,16 @@ export default function NewBooking(props) {
       return axios
         .post(`/api/bookings/${params.user_id}`, { events })
         .then((res) => {
-<<<<<<< HEAD
-          const newAppointment = {
-            start: moment.utc(res.data.start_time).toDate(),
-            end: moment.utc(res.data.end_time).toDate(),
-            title: res.data.title,
-          }; // assuming object { booking_id: 1, start: <date>, end: <data> ... }
-          setState({
-<<<<<<< HEAD
-            ...state,
-            events: [...state.events, newAppointment],
-          });
-=======
+          if(res.data.message === "Error")
+          {
+            alert("Max Capacity reached for this hour pls select other slot")
+          }
           navigate(`/bookings/${res.data.id}/summary`);
->>>>>>> 53a7ade03ec2b3aea86ea138930cf7e4e76af014
         });
-=======
-           ...state,
-           events: [...state.events, newAppointment]
-          })
-        })
-      )
->>>>>>> edit_amenities
     }
   };
 
   return (
-<<<<<<< HEAD
     <section className="Admin">
       <div className="Admin-box">
 
@@ -149,49 +132,9 @@ export default function NewBooking(props) {
               </div>
             </div>
           </div>
-<<<<<<< HEAD
-=======
-    <section className="Calendar">
-      <div className="Calendar_box">
-        <div style={{ width: 700, height: 500 }}>
-          <Calendar
-            localizer={localizer}
-            defaultDate={new Date()}
-            defaultView="month"
-            events={state.events}
-            style={{ height: "100%", width: "100%" }}
-            selectable={true}
-            //onSelectSlot={this.selectSlotHandler}
-            onSelectEvent={(event) =>
-              setState((previousState) => {
-                console.log(event);
-                const events = [...previousState.events];
-                const indexOfSelectedEvent = events.indexOf(event);
-                // console.log("I am index", indexOfSelectedEvent);
-                // console.log("this is all the events booked", events[0]);
-                // events.splice(indexOfSelectedEvent, 1);
-                return { events };
-              })
-            }
-            onSelectSlot={handleSelect}
-          />
-          <button
-            // onClick={
-            //   (event) =>
-            //     //cancel() /*this place should splice the events from onSelectEvent*/
-            // }
-          >
-            Cancel
-          </button>
->>>>>>> edit_amenities
-        </div>
-      }
-=======
         }
->>>>>>> 53a7ade03ec2b3aea86ea138930cf7e4e76af014
       </div>
     </section>
   );
-
   return { amenities, setAmenities };
 }
