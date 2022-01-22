@@ -14,7 +14,9 @@
   align-items: center;
   flex-direction: column;
   /* background-color: rgb(235, 212, 186); */
-  background-color: #f0eae2;
+  /* background-color: #f0eae2; */
+  background-color: #ffffff;
+  border: 3px solid #f0eae2;
   border-radius: 5em;
   margin-bottom: 2em;
   margin-top: -2em;
@@ -77,8 +79,8 @@
 
 #customers-user td, #customers-user th {
   /* border: 0.5px solid rgb(243, 242, 242); */
-  padding-right: 60px;
-  padding-left: 60px;
+  padding-right: 55px;
+  padding-left: 40px;
   padding-top: 15px;
   padding-bottom: 15px;
 }
