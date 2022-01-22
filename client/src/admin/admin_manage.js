@@ -1,6 +1,8 @@
-import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import { useNavigate, useParams, Prompt } from "react-router-dom";
 import '../css/Admin.css'
+import axios from "axios";
+
 
 
 export default function Manage() {
@@ -14,6 +16,57 @@ export default function Manage() {
     navigate(`/${params.user_id}/add`);
   }
 
+  
+  const [amenities, setAmenities] = useState([])
+  
+  useEffect(() => {
+    axios
+    .get(`/api/admin/amenities`) // You can simply make your requests to "/api/whatever you want"
+      .then((response) => {
+        setAmenities(response.data)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      
+  },[]);
+
+
+  const amenities_name_list = amenities.map((room, index) => {return(<option value={room.id}>{room.name}</option>)})
+
+  console.log("this is the name of the amenities in server:", amenities.map((room, index) => room.name ) );
+
+  const [selectedAmenity, setSelectedAmenity] = useState(null)
+  
+  const [selectedCapacity, setSelectedCapacity] = useState(null)
+
+
+  const deleteAmenity = (amenity_id) => {
+
+    const confirmation = window.confirm(`Are you sure you want to delete?`)
+    
+    if (confirmation){
+      //send delete request to backend servers
+      axios.delete(`/api/admin/amenities/${amenity_id}`)
+      return
+    } else {
+      return
+    }
+  }
+  const updateAmenity = (amenity_id, new_capacity) => {
+
+    const confirmation = window.confirm(`Are you sure you want to update?`)
+    
+    if (confirmation){
+      //send delete request to backend servers
+      axios.put(`/api/admin/amenities/${amenity_id}`, {capacity: new_capacity} )
+      return
+    } else {
+      return
+    }
+  }
+  
+//create post request 
   return (
 
     <section className="Admin">
@@ -25,27 +78,24 @@ export default function Manage() {
             <tr>
               <td>Select Amenity Room</td>
               <td>
-                <select name="rooms" id="rooms">
-                  <option value="option0">Choose From Options</option>
-                  <option value="option1">Gym Room</option>
-                  <option value="option2">Party Room Floor 2</option>
-                  <option value="option3">Party Room Floor 48</option>
-                  <option value="option4">Basketball Room</option>
+                <select name="rooms" id="rooms" onChange= {(event) => setSelectedAmenity(event.target.value)}>
+                  <option value="option0">Choose From Options</option> 
+                  {amenities_name_list}
                 </select>
               </td>
             </tr>
             <tr>
-              <td>Change Days Available</td>
+              <td>Change Times Available</td>
               <td>
                 <select name="rooms" id="rooms">
-                  <option value="option0">Calender to Choose Day</option>
+                  <option value="option0">Calendar to Choose Day</option>
                 </select>
               </td>
             </tr>
             <tr>
               <td>Max Capacity for Bookings (Per Hour)</td>
               <td>
-              <select name="rooms" id="rooms">
+              <select name="rooms" id="rooms" onChange= {(event) => setSelectedCapacity(event.target.innerHTML)}>
                   <option value="option0">1</option>
                   <option value="option1">2</option>
                   <option value="option2">5</option>
@@ -53,13 +103,16 @@ export default function Manage() {
                   <option value="option4">20</option>
                   <option value="option2">50</option>
                   <option value="option3">100</option>
-                </select>
+              </select>
                 </td>
             </tr>
           </tbody>
         </table>
-
-        <button className="add" onClick={handleClickAdd}>Add Amenity</button>
+        <div className="edit_amenities">
+          <button className="add" onClick={() => updateAmenity(selectedAmenity, selectedCapacity)}>Save Changes</button>
+          <button className="add" onClick={() => deleteAmenity(selectedAmenity)}>Delete Amenity</button>
+        </div>
+        
         <button className="back"onClick={() => navigate(-1)}>Back</button>
 
       </div>

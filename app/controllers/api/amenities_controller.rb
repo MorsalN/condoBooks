@@ -5,7 +5,10 @@ class Api::AmenitiesController < ApplicationController
     render json: @amenities
   end
 
-  def show
+  def destroy
+    @amenity = Amenity.find params[:id]
+    @amenity.destroy
+
   end
 
   def create
@@ -17,6 +20,12 @@ class Api::AmenitiesController < ApplicationController
       render json: amenity.errors
     end
 
+  end
+
+  def update
+    @amenity = Amenity.find params[:id]
+    Rails.logger.debug @aminity.inspect
+    #make sure amnity exists, if exists then update. save, else return an error
   end
 
 end

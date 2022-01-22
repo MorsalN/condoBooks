@@ -90,16 +90,25 @@ export default function NewBooking(props) {
             title: res.data.title,
           }; // assuming object { booking_id: 1, start: <date>, end: <data> ... }
           setState({
+<<<<<<< HEAD
             ...state,
             events: [...state.events, newAppointment],
           });
         });
+=======
+           ...state,
+           events: [...state.events, newAppointment]
+          })
+        })
+      )
+>>>>>>> edit_amenities
     }
   };
 
 
   // render() {
   return (
+<<<<<<< HEAD
     <section className="Admin">
       <div className="Admin-box">
 
@@ -138,6 +147,40 @@ export default function NewBooking(props) {
               <button>Cancel</button>
             </div>
           </div>
+=======
+    <section className="Calendar">
+      <div className="Calendar_box">
+        <div style={{ width: 700, height: 500 }}>
+          <Calendar
+            localizer={localizer}
+            defaultDate={new Date()}
+            defaultView="month"
+            events={state.events}
+            style={{ height: "100%", width: "100%" }}
+            selectable={true}
+            //onSelectSlot={this.selectSlotHandler}
+            onSelectEvent={(event) =>
+              setState((previousState) => {
+                console.log(event);
+                const events = [...previousState.events];
+                const indexOfSelectedEvent = events.indexOf(event);
+                // console.log("I am index", indexOfSelectedEvent);
+                // console.log("this is all the events booked", events[0]);
+                // events.splice(indexOfSelectedEvent, 1);
+                return { events };
+              })
+            }
+            onSelectSlot={handleSelect}
+          />
+          <button
+            // onClick={
+            //   (event) =>
+            //     //cancel() /*this place should splice the events from onSelectEvent*/
+            // }
+          >
+            Cancel
+          </button>
+>>>>>>> edit_amenities
         </div>
       }
       </div>

@@ -13,11 +13,16 @@ Rails.application.routes.draw do
     get '/users/amenities', to: 'amenities#index'
     
     resources :users, only: [:index]
-    resources :amenities, only: [:index, :show]
+    resources :amenities, only: [:index, :show, :update]
     
+
     scope :admin do
       root to: 'amenities#index'
       resources :amenities
+    scope 'admin' do
+      resources :amenities, only: [:index, :destroy, :put]
+  
+      edit_amenities
     end
 
     # namespace :admin do
