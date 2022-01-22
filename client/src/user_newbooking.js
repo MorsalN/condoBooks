@@ -84,6 +84,10 @@ export default function NewBooking(props) {
       return axios
         .post(`/api/bookings/${params.user_id}`, { events })
         .then((res) => {
+          if(res.data.message === "Error")
+          {
+            alert("Max Capacity reached for this hour pls select other slot")
+          }
           navigate(`/bookings/${res.data.id}/summary`);
         });
     }
