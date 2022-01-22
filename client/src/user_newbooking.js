@@ -130,7 +130,7 @@ export default function NewBooking(props) {
                     return { events };
                   })}
                   onSelectSlot={handleSelect} />
-                <button>Cancel</button>
+                {/* <button>Cancel</button> */}
               </div>
             </div>
           </div>
