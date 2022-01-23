@@ -6,21 +6,21 @@ This project is a platform that allows amenities to be booked without the need o
 ## Final Product
 
 #### Homepage
-!["Homepage"]()
+!["Homepage"](https://github.com/DarkArtsNinja/final_project/blob/master/docs/home.png)
 
 #### Choose Amenity Room
-!["Choose0"]()
-!["Choose"]()
+!["Choose0"](https://github.com/DarkArtsNinja/final_project/blob/master/docs/choose0.png)
+!["Choose"](https://github.com/DarkArtsNinja/final_project/blob/master/docs/choose.png)
 
 #### Booking
-!["Booking"]()
-!["ChooseTime"]()
-!["Summary"]()
+!["Booking"](https://github.com/DarkArtsNinja/final_project/blob/master/docs/booking.png)
+!["ChooseTime"](https://github.com/DarkArtsNinja/final_project/blob/master/docs/choosetime.png)
+!["Summary"](https://github.com/DarkArtsNinja/final_project/blob/master/docs/summary.png)
 
 #### Admin Homepage
-!["AdminHomepage"]()
-!["Add"]()
-!["Manage"]()
+!["AdminHomepage"](https://github.com/DarkArtsNinja/final_project/blob/master/docs/adminHome.png)
+!["Add"](https://github.com/DarkArtsNinja/final_project/blob/master/docs/add.png)
+!["Manage"](https://github.com/DarkArtsNinja/final_project/blob/master/docs/manage.png)
 
 ### User stories
 !["User Stories"](https://github.com/DarkArtsNinja/final_project/blob/master/docs/stories.png)
