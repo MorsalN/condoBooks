@@ -63,6 +63,14 @@ export default function NewBooking(props) {
         //Need to Map response.data to convert the incoming data to Calender format
         let appointments = response[0].data;
         console.log("appointments", appointments)
+      //   const se = new Date.utc(response[1].data.available_from) 
+      //  const ee = new Date.utc(response[1].data.available_to)
+        const se = moment.utc(response[1].data.available_from).toDate()
+        const ee = moment.utc(response[1].data.available_to).toDate()
+
+      //  const se= response[1].data.available_from.substring((response[1].data.available_from).indexOf("T") + 1, (response[1].data.available_from).lastIndexOf(":") )
+      //  const ee= response[1].data.available_to.substring((response[1].data.available_to).indexOf("T") + 1, (response[1].data.available_to).lastIndexOf(":") ) 
+      //  console.log("sf",se)
         appointments = appointments.map((appointment) => {
           return {
             start: moment.utc(appointment.start_time).toDate(),
@@ -74,8 +82,8 @@ export default function NewBooking(props) {
         setState({
           events: appointments,
           currentAmenity: amenity_id,
-          availableFrom: response[1].data.available_from,
-          availableTo: response[1].data.available_to
+          availableFrom: se,
+          availableTo: ee
         });
       })
       .catch(function (error) {
@@ -156,8 +164,9 @@ export default function NewBooking(props) {
                   style={{ height: "100%", width: "100%" }}
                   selectable={true}
                   timeslots={2}
-                  min={(state.availableFrom)} // 8.00 AM
-                  max={(state.availabelTo)}
+                  action="click"
+                  min={state.availableFrom} // 8.00 AM
+                  max={state.availabelTo}
                   //onSelectSlot={this.selectSlotHandler}
                   //onSelectEvent={event => alert(event.title)}
                   onSelectEvent={(e) => {
