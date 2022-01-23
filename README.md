@@ -31,12 +31,12 @@ This project is a platform that allows amenities to be booked without the need o
 ## Getting Started
 
 1. Open TWO terminals
-2. In one terminal, run bundle to install the dependencies.
-3. Run bin/rake db:setup to create the databases (called rails_project_development by default).
-4. Run bin/rails s to run the server.
+2. In one terminal, run `bundle` to install the dependencies.
+3. Run `bin/rake db:setup` to create the databases (called rails_project_development by default).
+4. Run `bin/rails s` to run the server.
 5. In the other terminal, cd into client.
-6. Run npm install.
-7. Run npm start
+6. Run `npm install`.
+7. Run `npm start`
 8. Visit localhost:3000 in your browser.
 
 ### Future Additions

@@ -80,9 +80,10 @@ export default function Add(props) {
                 </select>
               </td>
             </tr>
+
             <tr>
               <td>Times Available</td>
-              <td>
+              <td className="time-picker">
                 <label>
                   Start Time
                 </label>
@@ -90,6 +91,7 @@ export default function Add(props) {
                   onChange={setStart}
                   value={start}
                 />
+                <br/>
 
                 <label>
                   End Time
