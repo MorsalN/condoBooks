@@ -6,11 +6,15 @@ import {
 } from "react-router-dom";
 import axios from "axios";
 import { Calendar, momentLocalizer, TimeGrid } from "react-big-calendar";
-import moment from "moment";
+//import moment from "moment";
 import "./css/Calendar.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./css/Admin.css";
-const localizer = momentLocalizer(moment);
+const moment = require("moment-timezone")
+const m = (...args) => moment.tz(...args, "UTC");
+  m.localeData = moment.localeData;
+const localizer = momentLocalizer(m);
+
 
 export default function NewBooking(props) {
   //defining state of an Amenity
@@ -19,7 +23,7 @@ export default function NewBooking(props) {
   //defining state of the event
   const [state, setState] = useState({
     // event represent a booking
-    currentAmenity: null, availableFrom: "", availabelTo: "",
+    currentAmenity: null, availableFrom: "", availableTo: "",
     events: [
       {
         start: moment().toDate(),
@@ -58,15 +62,18 @@ export default function NewBooking(props) {
     axios.get(`/api/amenities/${amenity_id}`)
     ])
       .then((response) => {
-        console.log("Booking response", response)
+        console.log("Amenity Response", response[1].data)
         console.log("response[1].data.available_from,", response[1].data.available_from)
+        console.log("response[1].data.available_to,", response[1].data.available_to)
         //Need to Map response.data to convert the incoming data to Calender format
         let appointments = response[0].data;
         console.log("appointments", appointments)
       //   const se = new Date.utc(response[1].data.available_from) 
       //  const ee = new Date.utc(response[1].data.available_to)
-        const se = moment.utc(response[1].data.available_from).toDate()
-        const ee = moment.utc(response[1].data.available_to).toDate()
+        const se = moment.utc(response[1].data.available_from);
+        const ee = moment.utc(response[1].data.available_to);
+        console.log("moment tz", moment.tz)
+        //debugger
 
       //  const se= response[1].data.available_from.substring((response[1].data.available_from).indexOf("T") + 1, (response[1].data.available_from).lastIndexOf(":") )
       //  const ee= response[1].data.available_to.substring((response[1].data.available_to).indexOf("T") + 1, (response[1].data.available_to).lastIndexOf(":") ) 
@@ -82,6 +89,8 @@ export default function NewBooking(props) {
         setState({
           events: appointments,
           currentAmenity: amenity_id,
+          // availableFrom: new Date(se.year(), se.month(), se.day(), se.hour()),
+          // availableTo: new Date(ee.year(), ee.month(), ee.day(), ee.hour())
           availableFrom: se,
           availableTo: ee
         });
@@ -134,6 +143,9 @@ export default function NewBooking(props) {
     }
   };
 
+  console.log("state available from", state.availableFrom);
+  console.log("state available to", state.availableTo);
+
   return (
     <section className="Admin">
       <div className="Admin-box">
@@ -165,10 +177,8 @@ export default function NewBooking(props) {
                   selectable={true}
                   timeslots={2}
                   action="click"
-                  min={state.availableFrom} // 8.00 AM
-                  max={state.availabelTo}
-                  //onSelectSlot={this.selectSlotHandler}
-                  //onSelectEvent={event => alert(event.title)}
+                  min={(state.availableFrom)} // 8.00 AM
+                  max={state.availableTo}
                   onSelectEvent={(e) => {
                     deleteBooking(e);
                   }}
