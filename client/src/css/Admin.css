@@ -9,7 +9,7 @@
 }
 
 .Admin-box {
-  width: 60%;
+  /* width: 60%; */
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -126,4 +126,12 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.Admin-container {
+  display: flex;
+  flex-direction: column;
+  /* width: 400px; */
+  padding: 0px 40px;
+  align-items: center;
 }

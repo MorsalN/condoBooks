@@ -132,6 +132,9 @@ export default function NewBooking(props) {
     <section className="Admin">
 
       <div className="Admin-box">
+
+        <div className="Admin-container">
+          
         <td>
           <h2>Select Amenity Room</h2>
         </td>
@@ -146,7 +149,7 @@ export default function NewBooking(props) {
             {selectdAmenities}
           </select>
         </td>
-
+        
         {state.currentAmenity && (
           <div className="Calendar">
             <div className="Calendar_box">
@@ -174,6 +177,9 @@ export default function NewBooking(props) {
             </div>
           </div>
         )}
+      </div>
+
+
       </div>
     </section>
   );
