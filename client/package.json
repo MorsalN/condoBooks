@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "moment": "^2.29.1",
+    "moment-timezone": "^0.5.34",
     "rc-time-picker": "^3.7.3",
     "react": "^16.8.6",
     "react-big-calendar": "^0.38.5",
