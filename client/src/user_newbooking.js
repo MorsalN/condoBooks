@@ -130,6 +130,7 @@ export default function NewBooking(props) {
 
   return (
     <section className="Admin">
+
       <div className="Admin-box">
         <td>
           <h2>Select Amenity Room</h2>
