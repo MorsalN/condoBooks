@@ -4,7 +4,23 @@ This project is a platform that allows amenities to be booked without the need o
 
 
 ## Final Product
+
+#### Homepage
 !["Homepage"]()
+
+#### Choose Amenity Room
+!["Choose0"]()
+!["Choose"]()
+
+#### Booking
+!["Booking"]()
+!["ChooseTime"]()
+!["Summary"]()
+
+#### Admin Homepage
+!["AdminHomepage"]()
+!["Add"]()
+!["Manage"]()
 
 ### User stories
 !["User Stories"](https://github.com/DarkArtsNinja/final_project/blob/master/docs/stories.png)
