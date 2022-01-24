@@ -37,8 +37,8 @@ export default function Manage() {
   console.log("this is the name of the amenities in server:", amenities.map((room, index) => room.name ) );
 
   const [selectedAmenity, setSelectedAmenity] = useState(null)
-  
   const [selectedCapacity, setSelectedCapacity] = useState(null)
+  const [updatedHours, setUpdatedHours] = useState(null)
 
 
   const deleteAmenity = (amenity_id) => {
@@ -48,18 +48,33 @@ export default function Manage() {
     if (confirmation){
       //send delete request to backend servers
       axios.delete(`/api/admin/amenities/${amenity_id}`)
+      window.location.reload(true);
       return
     } else {
       return
     }
   }
-  const updateAmenity = (amenity_id, new_capacity) => {
+  const updateAmenity = (amenity_id, new_capacity, new_hours) => {
 
     const confirmation = window.confirm(`Are you sure you want to update?`)
-    
+
+    let hour = {
+      1: {available_from: "9:00", available_to: "17:00"},
+      2: {available_from: "00:00", available_to: "23:59"},
+      3: {available_from: "05:00", available_to: "23:59"},
+      4: {available_from: "00:00", available_to: "00:00"},
+    }
+
+    const data = {
+      capacity: new_capacity,
+      available_from: hour[new_hours].available_from,
+      available_to: hour[new_hours].available_to
+    }
+
     if (confirmation){
       //send delete request to backend servers
-      axios.put(`/api/admin/amenities/${amenity_id}`, {capacity: new_capacity} )
+      axios.put(`/api/admin/amenities/${amenity_id}`, data)
+      window.location.reload(true);
       return
     } else {
       return
@@ -87,8 +102,12 @@ export default function Manage() {
             <tr>
               <td>Change Times Available</td>
               <td>
-                <select name="rooms" id="rooms">
-                  <option value="option0">Calendar to Choose Day</option>
+                <select name="rooms" id="rooms" onChange= {(event) => setUpdatedHours(event.target.value)}>
+                  <option value="option0" style={{alignText: 'center'}}>Select the following</option>
+                  <option value="1">Business Hours - 9:00 to 17:00</option>
+                  <option value="2">All hours - 00:00 to 23:59</option>
+                  <option value="3">Early Morning/Late Night - 05:00 to 23:59</option>
+                  <option value="4">Temporarily Closed - 00:00 to 00:00</option>
                 </select>
               </td>
             </tr>
@@ -109,7 +128,7 @@ export default function Manage() {
           </tbody>
         </table>
         <div className="edit_amenities">
-          <button className="add" onClick={() => updateAmenity(selectedAmenity, selectedCapacity)}>Save Changes</button>
+          <button className="add" onClick={() => updateAmenity(selectedAmenity, selectedCapacity, updatedHours)}>Save Changes</button>
           <button className="add" onClick={() => deleteAmenity(selectedAmenity)}>Delete Amenity</button>
         </div>
         

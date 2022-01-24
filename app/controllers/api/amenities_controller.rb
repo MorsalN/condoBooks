@@ -37,12 +37,13 @@ class Api::AmenitiesController < ApplicationController
     puts params
 
 
-    #make sure amnity exists, if exists then update. save, else return an error
+    # make sure amnity exists, if exists then update. save, else return an error
     if @amenity.valid?
       
-      @amenity.update!(capacity: params[:capacity])
+      @amenity.update!(capacity: params[:capacity], available_from: params[:available_from], available_to: params[:available_to])
       
     end
+    render json: {sucesss: true}
 
 
   end
