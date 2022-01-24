@@ -78,6 +78,7 @@ export default function Manage() {
         //send delete request to backend servers
         axios.put(`/api/admin/amenities/${amenity_id}`, data)
         window.location.reload(true);
+        navigate(-1)
         return
       } else {
         return
@@ -140,7 +141,7 @@ export default function Manage() {
           <button className="add" onClick={() => deleteAmenity(selectedAmenity)}>Delete Amenity</button>
         </div>
         
-        <button className="back"onClick={() => navigate(-1)}>Back</button>
+        <button className="back" onClick={() => navigate(-1)}>Back</button>
 
       </div>
     </section>
