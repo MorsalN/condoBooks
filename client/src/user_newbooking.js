@@ -6,18 +6,18 @@ import {
 } from "react-router-dom";
 import axios from "axios";
 import { Calendar, momentLocalizer, TimeGrid } from "react-big-calendar";
-//import moment from "moment";
+import moment from "moment";
 import "./css/Calendar.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./css/Admin.css";
-const moment = require("moment-timezone");
-const m = (...args) => moment.tz(...args, "UTC");
-m.localeData = moment.localeData;
-const localizer = momentLocalizer(m);
+// const momentTimezone = require("moment-timezone");
+// const m = (...args) => momentTimezone.tz(...args, "UTC");
+// m.localeData = momentTimezone.localeData;
+// const localizer = momentLocalizer(m);
+const localizer = momentLocalizer(moment);
 
 export default function NewBooking(props) {
   //defining state of an Amenity
-  console.log("props in newBooking", props);
   const [amenities, setAmenities] = useState([]);
   //defining state of the event
   const [state, setState] = useState({
@@ -36,7 +36,6 @@ export default function NewBooking(props) {
 
   // Navigate and Params required to redirect to Summary Page
   const navigate = useNavigate();
-
   const params = useParams();
 
   //Initial request to get all amenities
@@ -62,18 +61,13 @@ export default function NewBooking(props) {
       axios.get(`/api/amenities/${amenity_id}`),
     ])
       .then((response) => {
-        console.log("Amenity Response", response[1].data);
-        console.log(
-          "response[1].data.available_from,",
-          response[1].data.available_from
-        );
-        console.log(
-          "response[1].data.available_to,",
-          response[1].data.available_to
-        );
         //Need to Map response.data to convert the incoming data to Calender format
-        const se = moment.utc(response[1].data.available_from);
-        const ee = moment.utc(response[1].data.available_to);
+        // const se = (response[1].data.available_from);
+        // const ee = (response[1].data.available_to);
+        console.log("response[1].data.available_from)", response[1].data.available_from)
+        const se = moment(response[1].data.available_from).toDate();
+        const ee = moment(response[1].data.available_to).toDate();
+        console.log("se and ee", se, ee)
 
         let appointments = response[0].data;
         appointments = appointments.map((appointment) => {
@@ -88,7 +82,7 @@ export default function NewBooking(props) {
           events: appointments,
           currentAmenity: amenity_id,
           availableFrom: se,
-          availableTo: ee,
+          availableTo: ee
         });
       })
       .catch(function (error) {
@@ -120,7 +114,6 @@ export default function NewBooking(props) {
   };
 
   const deleteBooking = (booking) => {
-    console.log("booing info", booking);
     let confirmation = window.confirm(
       `Are you sure you want to delete the ${booking.title}?`
     );
@@ -137,8 +130,8 @@ export default function NewBooking(props) {
     }
   };
 
-  console.log("state available from", state.availableFrom);
-  console.log("state available to", state.availableTo);
+  console.log("state.available from", state.availableFrom)
+  console.log("state.available to", state.availableTo)
 
   return (
     <section className="Admin">
@@ -171,7 +164,9 @@ export default function NewBooking(props) {
                     style={{ height: "100%", width: "100%" }}
                     selectable={true}
                     timeslots={2}
-                    action="click"
+                    //action="click"
+                    // min={new Date(state.availableFrom)} // 8.00 AM
+                    // max={new Date(state.availableTo)}
                     min={state.availableFrom} // 8.00 AM
                     max={state.availableTo}
                     onSelectEvent={(e) => {
