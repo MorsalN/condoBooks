@@ -10,20 +10,21 @@ import { Calendar, momentLocalizer, TimeGrid } from "react-big-calendar";
 import "./css/Calendar.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./css/Admin.css";
-const moment = require("moment-timezone")
+const moment = require("moment-timezone");
 const m = (...args) => moment.tz(...args, "UTC");
-  m.localeData = moment.localeData;
+m.localeData = moment.localeData;
 const localizer = momentLocalizer(m);
-
 
 export default function NewBooking(props) {
   //defining state of an Amenity
-  console.log("props in newBooking", props)
+  console.log("props in newBooking", props);
   const [amenities, setAmenities] = useState([]);
   //defining state of the event
   const [state, setState] = useState({
     // event represent a booking
-    currentAmenity: null, availableFrom: "", availableTo: "",
+    currentAmenity: null,
+    availableFrom: "",
+    availableTo: "",
     events: [
       {
         start: moment().toDate(),
@@ -41,7 +42,6 @@ export default function NewBooking(props) {
   //Initial request to get all amenities
   useEffect(() => {
     axios.get(`/api/users/amenities`).then((response) => {
-      // console.log("amenities response data", response.data);
       setAmenities(response.data);
     });
   }, []);
@@ -58,41 +58,37 @@ export default function NewBooking(props) {
   //Function to display Calender on the basis of selected amenity
   const selectCalender = function (amenity_id) {
     Promise.all([
-    axios.get(`/api/users/${params.user_id}/${amenity_id}/bookings`), // You can simply make your requests to "/api/whatever you want"
-    axios.get(`/api/amenities/${amenity_id}`)
+      axios.get(`/api/users/${params.user_id}/${amenity_id}/bookings`), // You can simply make your requests to "/api/whatever you want"
+      axios.get(`/api/amenities/${amenity_id}`),
     ])
       .then((response) => {
-        console.log("Amenity Response", response[1].data)
-        console.log("response[1].data.available_from,", response[1].data.available_from)
-        console.log("response[1].data.available_to,", response[1].data.available_to)
+        console.log("Amenity Response", response[1].data);
+        console.log(
+          "response[1].data.available_from,",
+          response[1].data.available_from
+        );
+        console.log(
+          "response[1].data.available_to,",
+          response[1].data.available_to
+        );
         //Need to Map response.data to convert the incoming data to Calender format
-        let appointments = response[0].data;
-        console.log("appointments", appointments)
-      //   const se = new Date.utc(response[1].data.available_from) 
-      //  const ee = new Date.utc(response[1].data.available_to)
         const se = moment.utc(response[1].data.available_from);
         const ee = moment.utc(response[1].data.available_to);
-        console.log("moment tz", moment.tz)
-        //debugger
 
-      //  const se= response[1].data.available_from.substring((response[1].data.available_from).indexOf("T") + 1, (response[1].data.available_from).lastIndexOf(":") )
-      //  const ee= response[1].data.available_to.substring((response[1].data.available_to).indexOf("T") + 1, (response[1].data.available_to).lastIndexOf(":") ) 
-      //  console.log("sf",se)
+        let appointments = response[0].data;
         appointments = appointments.map((appointment) => {
           return {
             start: moment.utc(appointment.start_time).toDate(),
             end: moment.utc(appointment.end_time).toDate(),
             title: appointment.title,
-            id: appointment.id
+            id: appointment.id,
           };
         });
         setState({
           events: appointments,
           currentAmenity: amenity_id,
-          // availableFrom: new Date(se.year(), se.month(), se.day(), se.hour()),
-          // availableTo: new Date(ee.year(), ee.month(), ee.day(), ee.hour())
           availableFrom: se,
-          availableTo: ee
+          availableTo: ee,
         });
       })
       .catch(function (error) {
@@ -124,7 +120,7 @@ export default function NewBooking(props) {
   };
 
   const deleteBooking = (booking) => {
-    console.log("booing info", booking)
+    console.log("booing info", booking);
     let confirmation = window.confirm(
       `Are you sure you want to delete the ${booking.title}?`
     );
@@ -135,10 +131,8 @@ export default function NewBooking(props) {
         .then(() => {
           confirmation = window.confirm("Appointment Deleted");
           window.location.reload();
-        }
-          )
-    }
-     else {
+        });
+    } else {
       return alert(`You cant delete this ${booking.title}"`);
     }
   };
@@ -148,53 +142,48 @@ export default function NewBooking(props) {
 
   return (
     <section className="Admin">
-
       <div className="Admin-box">
-
         <div className="Admin-container">
-          
-        <td>
-          <h2>Select Amenity Room</h2>
-        </td>
-        <td>
-          <select
-            className="room-options"
-            name="rooms"
-            id="rooms"
-            onChange={(e) => selectCalender(e.target.value)}
-          >
-            <option value="options">Choose From Options</option>
-            {selectdAmenities}
-          </select>
-        </td>
-        
-        {state.currentAmenity && (
-          <div className="Calendar">
-            <div className="Calendar_box">
-              <div style={{ width: 700, height: 500 }}>
-                <Calendar
-                  localizer={localizer}
-                  defaultDate={new Date()}
-                  defaultView="month"
-                  events={state.events}
-                  style={{ height: "100%", width: "100%" }}
-                  selectable={true}
-                  timeslots={2}
-                  action="click"
-                  min={(state.availableFrom)} // 8.00 AM
-                  max={state.availableTo}
-                  onSelectEvent={(e) => {
-                    deleteBooking(e);
-                  }}
-                  onSelectSlot={handleSelect}
-                />
+          <td>
+            <h2>Select Amenity Room</h2>
+          </td>
+          <td>
+            <select
+              className="room-options"
+              name="rooms"
+              id="rooms"
+              onChange={(e) => selectCalender(e.target.value)}
+            >
+              <option value="options">Choose From Options</option>
+              {selectdAmenities}
+            </select>
+          </td>
+
+          {state.currentAmenity && (
+            <div className="Calendar">
+              <div className="Calendar_box">
+                <div style={{ width: 700, height: 500 }}>
+                  <Calendar
+                    localizer={localizer}
+                    defaultDate={new Date()}
+                    defaultView="month"
+                    events={state.events}
+                    style={{ height: "100%", width: "100%" }}
+                    selectable={true}
+                    timeslots={2}
+                    action="click"
+                    min={state.availableFrom} // 8.00 AM
+                    max={state.availableTo}
+                    onSelectEvent={(e) => {
+                      deleteBooking(e);
+                    }}
+                    onSelectSlot={handleSelect}
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        )}
-      </div>
-
-
+          )}
+        </div>
       </div>
     </section>
   );
