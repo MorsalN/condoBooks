@@ -58,6 +58,9 @@ export default function Add(props) {
               <td>
                 <select name="rooms" id="rooms">
                   <option value="option0">Calender to Choose Day</option>
+                  <option value={1}>All Days</option>
+                  <option value={2}>Weekdays</option>
+                  <option value={5}>Weekends</option>
                 </select>
               </td>
             </tr>
