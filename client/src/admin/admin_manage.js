@@ -49,6 +49,8 @@ export default function Manage() {
       //send delete request to backend servers
       axios.delete(`/api/admin/amenities/${amenity_id}`)
       window.location.reload(true);
+      navigate(-1)
+
       return
     } else {
       return
