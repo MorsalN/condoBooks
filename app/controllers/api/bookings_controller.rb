@@ -13,7 +13,7 @@ class Api::BookingsController < ApplicationController
   
   def capacity(params)
     totalBookings = Booking.where(amenity_id: params["events"]["currentAmenity"], 
-    start_time: params["events"]["start"], end_time: params["events"]["end"])
+    start_time: params["events"]["start"])
     totalCount = totalBookings.count
 
     maxCapacity = Amenity.find(params["events"]["currentAmenity"])
