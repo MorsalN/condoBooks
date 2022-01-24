@@ -44,6 +44,7 @@ export default function Amenities(props) {
       <td>{room.available_from.substring((room.available_from).indexOf("T") + 1, (room.available_from).lastIndexOf(":") )}</td>
       <td>{room.available_to.substring((room.available_to).indexOf("T") + 1, (room.available_to).lastIndexOf(":") )}</td>
       <td>{room.availability ? "All Days" : "Closed"}</td>
+      <td>{room.capacity}</td>
       <td><button className="manage" onClick={handleClickManage}>Manage Amenity</button></td>
       </tr>)
 
@@ -63,6 +64,7 @@ export default function Amenities(props) {
                 <th>Start</th>
                 <th>End</th>
                 <th>Days</th>
+                <th>Capacity</th>
                 <th></th>
               </tr>
               {returnedAmenities}
