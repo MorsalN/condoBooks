@@ -58,25 +58,32 @@ export default function Manage() {
 
     const confirmation = window.confirm(`Are you sure you want to update?`)
 
-    let hour = {
-      1: {available_from: "9:00", available_to: "17:00"},
-      2: {available_from: "00:00", available_to: "23:59"},
-      3: {available_from: "05:00", available_to: "23:59"},
-      4: {available_from: "00:00", available_to: "00:00"},
-    }
+    if (amenity_id && new_capacity && new_hours) {
+      
+      
+      let hour = {
+        1: {available_from: "9:00", available_to: "17:00"},
+        2: {available_from: "00:00", available_to: "23:59"},
+        3: {available_from: "05:00", available_to: "23:59"},
+        4: {available_from: "00:00", available_to: "00:00"},
+      }
 
-    const data = {
-      capacity: new_capacity,
-      available_from: hour[new_hours].available_from,
-      available_to: hour[new_hours].available_to
-    }
-
-    if (confirmation){
-      //send delete request to backend servers
-      axios.put(`/api/admin/amenities/${amenity_id}`, data)
-      window.location.reload(true);
-      return
+      const data = {
+        capacity: new_capacity,
+        available_from: hour[new_hours].available_from,
+        available_to: hour[new_hours].available_to
+      }
+      
+      if (confirmation){
+        //send delete request to backend servers
+        axios.put(`/api/admin/amenities/${amenity_id}`, data)
+        window.location.reload(true);
+        return
+      } else {
+        return
+      }
     } else {
+      window.alert('In order to update you must fill all 3 options')
       return
     }
   }
@@ -115,6 +122,7 @@ export default function Manage() {
               <td>Max Capacity for Bookings (Per Hour)</td>
               <td>
               <select name="rooms" id="rooms" onChange= {(event) => setSelectedCapacity(event.target.value)}>
+                  <option value="0"># of bookings</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="5">5</option>
