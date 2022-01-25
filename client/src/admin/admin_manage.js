@@ -78,10 +78,12 @@ export default function Manage() {
       
       if (confirmation){
         //send delete request to backend servers
-        axios.put(`/api/admin/amenities/${amenity_id}`, data)
+        return axios
+        .put(`/api/admin/amenities/${amenity_id}`, data)
+        .then(() => {
+        navigate(`/admin/amenities`)
         window.location.reload(true);
-        navigate(-1)
-        return
+      })
       } else {
         return
       }
