@@ -27,7 +27,7 @@ export default function Summary(props) {
         .delete(`/api/bookings/${booking.id}`, { booking })
         .then(() => {
           confirmation = window.confirm("Appointment Deleted");
-          navigate(`/${params.user_id}/booking`);
+          navigate(`/1/booking`);
         }
           )
     }
