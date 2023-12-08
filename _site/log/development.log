@@ -1,0 +1,150 @@
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE DATABASE "rails_project_development" ENCODING = 'unicode'[0m
+  ↳ bin/rake:9
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE DATABASE "rails_project_test" ENCODING = 'unicode'[0m
+  ↳ bin/rake:9
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rake:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rake:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rake:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rake:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rake:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rake:9
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  ↳ db/schema.rb:16
+  [1m[35m (2.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "amenities" CASCADE[0m
+  ↳ db/schema.rb:18
+  [1m[35m (4.9ms)[0m  [1m[35mCREATE TABLE "amenities" ("id" bigserial primary key, "name" character varying(50), "capacity" integer, "available_from" timestamp, "available_to" timestamp, "availability" boolean DEFAULT TRUE, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:18
+  [1m[35m (2.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "bookings" CASCADE[0m
+  ↳ db/schema.rb:28
+  [1m[35m (5.0ms)[0m  [1m[35mCREATE TABLE "bookings" ("id" bigserial primary key, "title" character varying(20), "user_id" character varying, "start_time" timestamp, "end_time" timestamp, "amenity_id" character varying, "admin_id" boolean, "weekday" character varying, "date" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:28
+  [1m[35m (1.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  ↳ db/schema.rb:41
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "first_name" character varying(50), "last_name" character varying(50), "email" character varying(50), "phone" character varying DEFAULT '' NOT NULL, "unit" character varying, "admin" boolean, "building_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:41
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rake:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rake:9
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rake:9
+  [1m[35mSQL (0.2ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  ↳ db/schema.rb:16
+  [1m[35m (2.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "amenities" CASCADE[0m
+  ↳ db/schema.rb:18
+  [1m[35m (4.8ms)[0m  [1m[35mCREATE TABLE "amenities" ("id" bigserial primary key, "name" character varying(50), "capacity" integer, "available_from" timestamp, "available_to" timestamp, "availability" boolean DEFAULT TRUE, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:18
+  [1m[35m (1.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "bookings" CASCADE[0m
+  ↳ db/schema.rb:28
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE TABLE "bookings" ("id" bigserial primary key, "title" character varying(20), "user_id" character varying, "start_time" timestamp, "end_time" timestamp, "amenity_id" character varying, "admin_id" boolean, "weekday" character varying, "date" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:28
+  [1m[35m (1.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  ↳ db/schema.rb:41
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "first_name" character varying(50), "last_name" character varying(50), "email" character varying(50), "phone" character varying DEFAULT '' NOT NULL, "unit" character varying, "admin" boolean, "building_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:41
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Update (0.2ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "development"], ["updated_at", "2023-12-08 21:44:12.937967"], ["key", "environment"]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rake:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rake:9
+  [1m[36mActiveRecord::InternalMetadata Update (0.3ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2023-12-08 21:44:12.940455"], ["key", "environment"]]
+  ↳ bin/rake:9
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rake:9
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rake:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:9
+  [1m[36mAmenity Create (0.7ms)[0m  [1m[32mINSERT INTO "amenities" ("name", "capacity", "available_from", "available_to", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Gym Room"], ["capacity", 2], ["available_from", "2022-01-21 10:00:00"], ["available_to", "2023-01-21 20:00:00"], ["created_at", "2023-12-08 21:44:12.969388"], ["updated_at", "2023-12-08 21:44:12.969388"]]
+  ↳ db/seeds.rb:9
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:17
+  [1m[36mAmenity Create (0.3ms)[0m  [1m[32mINSERT INTO "amenities" ("name", "capacity", "available_from", "available_to", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Social Room"], ["capacity", 10], ["available_from", "2022-01-21 17:00:00"], ["available_to", "2023-01-02 20:00:00"], ["created_at", "2023-12-08 21:44:12.971863"], ["updated_at", "2023-12-08 21:44:12.971863"]]
+  ↳ db/seeds.rb:17
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:17
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:25
+  [1m[36mAmenity Load (0.2ms)[0m  [1m[34mSELECT  "amenities".* FROM "amenities" WHERE "amenities"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:25
+  [1m[36mBooking Create (1.1ms)[0m  [1m[32mINSERT INTO "bookings" ("title", "user_id", "start_time", "end_time", "amenity_id", "weekday", "date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["title", "My Booking1"], ["user_id", "1"], ["start_time", "2022-01-22 02:04:01"], ["end_time", "2022-01-22 03:04:01"], ["amenity_id", "1"], ["weekday", "Fri Jan 21 2022 21:04:01 GMT-0600 (CST)"], ["date", "2022-01-22 03:04:01"], ["created_at", "2023-12-08 21:44:12.998833"], ["updated_at", "2023-12-08 21:44:12.998833"]]
+  ↳ db/seeds.rb:25
+  [1m[35m (1.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:25
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:35
+  [1m[36mAmenity Load (0.2ms)[0m  [1m[34mSELECT  "amenities".* FROM "amenities" WHERE "amenities"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:35
+  [1m[36mBooking Create (0.2ms)[0m  [1m[32mINSERT INTO "bookings" ("title", "user_id", "start_time", "end_time", "amenity_id", "weekday", "date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["title", "My Booking2"], ["user_id", "2"], ["start_time", "2022-01-23 01:04:01"], ["end_time", "2022-01-23 03:04:01"], ["amenity_id", "2"], ["weekday", "Fri Jan 21 2022 21:04:01 GMT-0600 (CST)"], ["date", "2022-01-22 03:04:01"], ["created_at", "2023-12-08 21:44:13.004098"], ["updated_at", "2023-12-08 21:44:13.004098"]]
+  ↳ db/seeds.rb:35
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:35
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:45
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email", "phone", "unit", "admin", "building_name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["first_name", "John"], ["last_name", "Smith"], ["email", "john.smith@gmail.com"], ["phone", "111-111-111"], ["unit", "007"], ["admin", false], ["building_name", "Rails"], ["created_at", "2023-12-08 21:44:13.019617"], ["updated_at", "2023-12-08 21:44:13.019617"]]
+  ↳ db/seeds.rb:45
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:45
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:55
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email", "phone", "unit", "admin", "building_name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["first_name", "James"], ["last_name", "Nation"], ["email", "james.nation@gmail.com"], ["phone", "111-111-22"], ["unit", "008"], ["admin", false], ["building_name", "Rails"], ["created_at", "2023-12-08 21:44:13.021919"], ["updated_at", "2023-12-08 21:44:13.021919"]]
+  ↳ db/seeds.rb:55
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:55
+Started GET "/api/admin/amenities" for 127.0.0.1 at 2023-12-08 13:44:57 -0800
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/morsal/.rbenv/versions/2.6.2/lib/ruby/gems/2.6.0/gems/activerecord-5.2.6/lib/active_record/log_subscriber.rb:98
+Processing by Api::AmenitiesController#index as HTML
+  [1m[36mAmenity Load (0.6ms)[0m  [1m[34mSELECT "amenities".* FROM "amenities"[0m
+  ↳ app/controllers/api/amenities_controller.rb:5
+Completed 200 OK in 27ms (Views: 17.4ms | ActiveRecord: 6.1ms)
+
+
+Started GET "/api/users/amenities" for 127.0.0.1 at 2023-12-08 13:44:59 -0800
+Processing by Api::AmenitiesController#index as HTML
+  [1m[36mAmenity Load (0.2ms)[0m  [1m[34mSELECT "amenities".* FROM "amenities"[0m
+  ↳ app/controllers/api/amenities_controller.rb:5
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/api/users/1/1/bookings" for 127.0.0.1 at 2023-12-08 13:45:01 -0800
+Started GET "/api/amenities/1" for 127.0.0.1 at 2023-12-08 13:45:01 -0800
+Processing by Api::AmenitiesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mAmenity Load (0.2ms)[0m  [1m[34mSELECT  "amenities".* FROM "amenities" WHERE "amenities"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/amenities_controller.rb:9
+Completed 200 OK in 4ms (Views: 0.9ms | ActiveRecord: 0.4ms)
+
+
+Processing by Api::UsersController#user_bookings as HTML
+  Parameters: {"id"=>"1", "amenity_id"=>"1"}
+  [1m[36mBooking Load (0.5ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."user_id" = $1 AND "bookings"."amenity_id" = $2[0m  [["user_id", "1"], ["amenity_id", "1"]]
+  ↳ app/controllers/api/users_controller.rb:10
+Completed 200 OK in 58ms (Views: 43.9ms | ActiveRecord: 7.9ms)
+
+
